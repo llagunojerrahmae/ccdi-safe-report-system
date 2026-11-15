@@ -1,67 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @include('partials.head')
     <title>SafeReport - Faculty Login</title>
-    @vite('resources/css/app.css')
 </head>
-<body class="bg-slate-50 min-h-screen flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
+<body class="min-h-screen bg-slate-50 text-[#1e2a4a] antialiased flex items-center justify-center p-6">
 
-    <div class="text-center mb-8">
-        <img src="{{ asset('logo/logo.jpg') }}" alt="CCDI Logo" class="w-16 h-16 mx-auto mb-3 rounded-full object-cover border-2 border-red-600 shadow-md">
-        <h1 class="text-2xl font-black tracking-wide text-blue-950">
-            SAFEREPORT<span class="text-red-500">.</span>
-        </h1>
-        <p class="text-slate-500 text-sm font-medium mt-1">Faculty Portal Login</p>
-    </div>
+    <main class="w-full max-w-4xl grid md:grid-cols-[1.1fr_1fr] bg-white rounded-[28px] shadow-2xl shadow-[#14204a]/20 overflow-hidden">
 
-    <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
-
-        @if(session('success'))
-            <div class="bg-emerald-50 text-emerald-700 p-3 rounded-lg text-sm mb-4 border border-emerald-200">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        <form action="{{ route('faculty.login.store') }}" method="POST" class="space-y-5" autocomplete="off">
-            @csrf
-
-            <div>
-                <label for="email" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Email Address</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus
-                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/30 focus:bg-white focus:border-blue-900 focus:ring-2 focus:ring-blue-900/20 text-slate-800 text-sm transition outline-none"
-                    placeholder="faculty@ccdi.edu.ph">
-                @error('email')
-                    <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
-                @enderror
+        {{-- Left panel: same navy hero style as the landing page --}}
+        <section class="flex flex-col justify-between gap-10 p-8 md:p-12 text-white bg-gradient-to-b from-[#14204a] via-[#26408b] to-[#14204a]">
+            <div class="flex items-center gap-3">
+                <img src="{{ asset('logo/logo.jpg') }}" alt="CCDI logo"
+                     class="size-14 rounded-full bg-white object-contain ring-2 ring-red-600">
+                <div class="leading-tight">
+                    <div class="text-xl font-extrabold tracking-wide">SAFEREPORT<span class="text-red-500">.</span></div>
+                    <div class="text-[10px] uppercase tracking-wide text-blue-100">Computer Communication Development Institute</div>
+                </div>
             </div>
 
             <div>
-                <label for="password" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Password</label>
-                <input type="password" id="password" name="password" required autocomplete="new-password"
-                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/30 focus:bg-white focus:border-blue-900 focus:ring-2 focus:ring-blue-900/20 text-slate-800 text-sm transition outline-none"
-                    placeholder="••••••••••••">
-                @error('password')
-                    <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
-                @enderror
+                <h1 class="text-4xl md:text-5xl font-extrabold leading-[1.08] tracking-tight mb-4">
+                    Stay Informed, <span class="text-red-500">Protect</span> Our School.
+                </h1>
+                <p class="text-blue-100 text-lg leading-relaxed">Follow the reports you handle and keep every case confidential.</p>
             </div>
 
-            <button type="submit"
-                class="w-full bg-blue-950 hover:bg-blue-900 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition duration-200 tracking-wider text-sm uppercase">
-                LOG IN
-            </button>
-        </form>
+            <div class="flex flex-wrap gap-2.5">
+                <span class="text-xs font-semibold border border-white/40 bg-white/10 rounded-full px-3.5 py-2">100% Anonymous</span>
+                <span class="text-xs font-semibold border border-white/40 bg-white/10 rounded-full px-3.5 py-2">Fast Reporting</span>
+                <span class="text-xs font-semibold border border-white/40 bg-white/10 rounded-full px-3.5 py-2">Direct Action</span>
+            </div>
+        </section>
 
-        <p class="text-center text-sm text-slate-500 mt-6">
-            Don't have an account yet?
-            <a href="{{ route('faculty.register') }}" class="text-blue-800 font-semibold hover:underline">Register as Faculty</a>
-        </p>
-    </div>
+        {{-- Right panel --}}
+        <section class="flex flex-col justify-center p-8 md:p-12">
+            <h2 class="text-3xl font-extrabold text-[#14204a] mb-1.5">Faculty Portal Login</h2>
+            <p class="text-sm text-slate-500 mb-7">Sign in with your faculty account to view reports.</p>
 
-    <div class="mt-8 text-center">
-        <a href="{{ route('home') }}" class="text-xs font-semibold text-blue-900 hover:underline transition">&larr; Back to SafeReport</a>
-    </div>
+            <form method="POST" action="{{ url('/faculty/login') }}" class="space-y-5">
+                @csrf
+
+                @if ($errors->any())
+                    <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-700">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+
+                <div>
+                    <label for="email" class="block mb-2 text-xs font-semibold uppercase tracking-wider">Email address</label>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                        placeholder="faculty@ccdi.edu.ph"
+                        class="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-[15px] outline-none transition focus:border-[#26408b] focus:ring-4 focus:ring-[#26408b]/15">
+                </div>
+
+                <div>
+                    <label for="password" class="block mb-2 text-xs font-semibold uppercase tracking-wider">Password</label>
+                    <input id="password" type="password" name="password" required
+                        placeholder="Enter your password"
+                        class="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-[15px] outline-none transition focus:border-[#26408b] focus:ring-4 focus:ring-[#26408b]/15">
+                </div>
+
+                <button type="submit"
+                    class="w-full rounded-xl bg-red-600 py-4 text-[15px] font-bold text-white shadow-lg shadow-red-600/30 transition hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                    Log in
+                </button>
+            </form>
+
+            <p class="mt-6 text-center text-sm text-slate-500">
+                Don't have an account yet?
+                <a href="{{ url('/faculty/register') }}" class="font-semibold text-[#26408b] hover:underline">Register as Faculty</a>
+            </p>
+
+            <p class="mt-4 text-center text-sm">
+                <a href="{{ url('/') }}" class="font-semibold text-[#26408b] hover:underline">&larr; Back to SafeReport</a>
+            </p>
+        </section>
+    </main>
 
 </body>
 </html>

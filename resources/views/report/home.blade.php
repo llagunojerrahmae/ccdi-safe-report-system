@@ -22,7 +22,7 @@
         <div class="hidden md:flex items-center gap-8 text-blue-100 font-medium text-sm">
             <a href="{{ route('home') }}" class="hover:text-white transition">Home</a>
             <a href="{{ route('report.track') }}" class="hover:text-white transition text-yellow-400 font-bold">Track Report</a>
-            <a href="{{ route('about') }}" class="hover:text-white transition">About Us</a>
+            <a href="{{ route('about') }}" class="hover:text-white transition">About</a>
             <a href="{{ route('contact') }}" class="hover:text-white transition">Contact</a>
             <a href="{{ route('terms') }}" class="hover:text-white transition">Terms</a>
         </div>

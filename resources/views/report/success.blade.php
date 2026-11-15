@@ -17,7 +17,7 @@
         </div>
 
         <h2 class="text-2xl font-extrabold text-slate-800">Report Successfully Submitted!</h2>
-        <p class="text-slate-500 text-sm mt-2">I-save ang iyong Tracking Code para masubaybayan ang status ng iyong report.</p>
+        <p class="text-slate-500 text-sm mt-2">Save your Tracking Code to monitor the status of your report.</p>
 
         <!-- Tracking Code Display Box -->
         <div class="bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl p-4 my-6">

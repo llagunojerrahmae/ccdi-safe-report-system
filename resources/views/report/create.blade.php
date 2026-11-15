@@ -22,7 +22,7 @@
         <div class="hidden md:flex items-center gap-8 text-blue-100 font-medium text-sm">
             <a href="{{ route('home') }}" class="hover:text-white transition">Home</a>
             <a href="{{ route('report.track') }}" class="hover:text-white transition text-yellow-400 font-bold">Track Report</a>
-            <a href="{{ route('about') }}" class="hover:text-white transition">About Us</a>
+            <a href="{{ route('about') }}" class="hover:text-white transition">About</a>
             <a href="{{ route('contact') }}" class="hover:text-white transition">Contact</a>
             <a href="{{ route('terms') }}" class="hover:text-white transition">Terms</a>
         </div>
@@ -40,7 +40,8 @@
 </nav>
 
 <!-- Form Card -->
-<div id="report-section" class="max-w-2xl mx-auto px-6 pt-12 pb-20">
+<div id="report-section" class="bg-gradient-to-b from-blue-100/70 via-blue-50/40 to-slate-50">
+<div class="max-w-2xl mx-auto px-6 pt-12 pb-20">
 
     <!-- Validation Error Container -->
     @if ($errors->any())
@@ -55,106 +56,132 @@
     @endif
 
     <form id="report-form" action="{{ route('report.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off"
-          class="bg-white rounded-2xl shadow-2xl p-8 md:p-10 space-y-6 border border-slate-100">
+          class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-blue-950/10">
         @csrf
 
-        <div class="flex items-center justify-center gap-2 pb-2">
-            <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-            <h3 class="text-blue-950 font-bold text-xl tracking-wide">SUBMIT ANONYMOUS REPORT</h3>
-        </div>
-
-        <!-- Incident Type -->
-        <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Incident Type <span class="text-red-600">*</span></label>
-            <select name="incident_type" required
-                class="w-full rounded-lg border-slate-300 focus:border-blue-700 focus:ring-blue-700 shadow-sm">
-                <option value="">Select Incident Type</option>
-                <option value="bullying" {{ old('incident_type') == 'bullying' ? 'selected' : '' }}>Bullying (including Cyberbullying)</option>
-                <option value="harassment" {{ old('incident_type') == 'harassment' ? 'selected' : '' }}>Harassment</option>
-                <option value="deadly_weapon" {{ old('incident_type') == 'deadly_weapon' ? 'selected' : '' }}>Possession of Deadly Weapons</option>
-                <option value="theft" {{ old('incident_type') == 'theft' ? 'selected' : '' }}>Theft</option>
-                <option value="vandalism" {{ old('incident_type') == 'vandalism' ? 'selected' : '' }}>Vandalism</option>
-                <option value="other" {{ old('incident_type') == 'other' ? 'selected' : '' }}>Other Incidents or Threats</option>
-            </select>
-            @error('incident_type') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
-        </div>
-
-        <!-- Location -->
-        <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Where did it happen? <span class="text-red-600">*</span></label>
-            <input type="text" name="location" value="{{ old('location') }}" required
-                placeholder="e.g. Room 201, Computer Lab 1, Canteen, Hallway near the library"
-                class="w-full rounded-lg border-slate-300 focus:border-blue-700 focus:ring-blue-700 shadow-sm placeholder:text-slate-400">
-            <p class="text-xs text-slate-400 mt-1">Be as specific as you can so the administration can find the area quickly.</p>
-            @error('location') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
-        </div>
-
-        <!-- Description -->
-        <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1.5">What happened? <span class="text-red-600">*</span></label>
-            <textarea name="description" rows="4" required
-                placeholder="Describe the incident or threat: what happened, when it happened (date and time), and who or what was involved. Avoid including your own name or details that could identify you."
-                class="w-full rounded-lg border-slate-300 focus:border-blue-700 focus:ring-blue-700 shadow-sm placeholder:text-slate-400">{{ old('description') }}</textarea>
-            <p class="text-xs text-slate-400 mt-1">Your report is anonymous. Only share what you are comfortable sharing.</p>
-            @error('description') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
-        </div>
-
-        <!-- Attach Proof with Preview JS -->
-        <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Attach Proof (Picture or Video)</label>
-            <label for="evidence"
-                class="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-blue-300 rounded-xl py-8 px-4 cursor-pointer hover:bg-blue-50 transition">
-                <svg class="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 8.25 12 3.75m0 0L7.5 8.25M12 3.75v13.5"/>
+        <!-- Card header -->
+        <div class="bg-gradient-to-b from-blue-950 to-blue-800 px-8 pt-8 pb-7 text-center text-white">
+            <div class="mx-auto mb-3 grid size-12 place-items-center rounded-full bg-white/15 ring-1 ring-white/40">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
-                <span id="file-label" class="text-blue-800 text-sm font-medium text-center">
-                    Upload photo/video evidence (PNG, JPG, MP4, MOV)
-                </span>
-                <input id="evidence" type="file" name="evidence[]" multiple accept="image/*,video/*" class="hidden" onchange="previewFiles(this)">
-            </label>
-
-            <!-- Dynamic File Names Display -->
-            <div id="file-list" class="mt-3 space-y-1 text-xs text-emerald-700 font-semibold"></div>
-
-            @error('evidence') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
-            @error('evidence.*') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
-        </div>
-
-        <!-- Info Row -->
-        <div class="flex items-center justify-between text-sm text-slate-500 border-t border-slate-100 pt-4">
-            <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-blue-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                </svg>
-                Security Information
             </div>
-            <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-blue-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <h3 class="text-2xl font-extrabold tracking-wide">SUBMIT ANONYMOUS REPORT</h3>
+            <p class="mt-1.5 text-sm text-blue-100">Your voice helps keep our school safe.</p>
+        </div>
+
+        <div class="space-y-7 p-8 md:p-10">
+
+            <!-- Privacy note -->
+            <div class="flex items-start gap-3 rounded-2xl bg-blue-50 px-4 py-3.5 text-sm text-blue-900">
+                <svg class="mt-0.5 size-5 shrink-0 text-blue-800" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25h-10.5a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
                 </svg>
-                Anonymous Report
+                <p>Your report is anonymous. We don't collect your name or any personal information.</p>
+            </div>
+
+            <!-- Incident Type -->
+            <div>
+                <label for="incident_type" class="mb-2 block text-sm font-semibold text-blue-950">Incident Type <span class="text-red-600">*</span></label>
+                <div class="relative">
+                    <svg class="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/>
+                    </svg>
+                    <select id="incident_type" name="incident_type" required
+                        class="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 py-3.5 pl-12 pr-11 text-[15px] text-slate-700 outline-none transition focus:border-blue-700 focus:bg-white focus:ring-4 focus:ring-blue-700/15">
+                        <option value="">Select Incident Type</option>
+                        <option value="bullying" {{ old('incident_type') == 'bullying' ? 'selected' : '' }}>Bullying (including Cyberbullying)</option>
+                        <option value="harassment" {{ old('incident_type') == 'harassment' ? 'selected' : '' }}>Harassment</option>
+                        <option value="deadly_weapon" {{ old('incident_type') == 'deadly_weapon' ? 'selected' : '' }}>Possession of Deadly Weapons</option>
+                        <option value="theft" {{ old('incident_type') == 'theft' ? 'selected' : '' }}>Theft</option>
+                        <option value="vandalism" {{ old('incident_type') == 'vandalism' ? 'selected' : '' }}>Vandalism</option>
+                        <option value="other" {{ old('incident_type') == 'other' ? 'selected' : '' }}>Other Incidents or Threats</option>
+                    </select>
+                    <svg class="pointer-events-none absolute right-4 top-1/2 size-5 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/>
+                    </svg>
+                </div>
+                @error('incident_type') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+            </div>
+
+            <!-- Location -->
+            <div>
+                <label for="location" class="mb-2 block text-sm font-semibold text-blue-950">Where did it happen? <span class="text-red-600">*</span></label>
+                <div class="relative">
+                    <svg class="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/>
+                        <circle cx="12" cy="10" r="2.5"/>
+                    </svg>
+                    <input id="location" type="text" name="location" value="{{ old('location') }}" required
+                        placeholder="e.g. Room 201, Computer Lab 1, Canteen, Hallway near the library"
+                        class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3.5 pl-12 pr-4 text-[15px] outline-none transition placeholder:text-slate-400 focus:border-blue-700 focus:bg-white focus:ring-4 focus:ring-blue-700/15">
+                </div>
+                <p class="mt-1.5 text-xs text-slate-500">Be as specific as you can so the administration can find the area quickly.</p>
+                @error('location') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+            </div>
+
+            <!-- Description -->
+            <div>
+                <div class="mb-2 flex items-end justify-between">
+                    <label for="description" class="block text-sm font-semibold text-blue-950">What happened? <span class="text-red-600">*</span></label>
+                    <span id="desc-count" class="text-xs text-slate-400">0 characters</span>
+                </div>
+                <textarea id="description" name="description" rows="5" required
+                    placeholder="Describe the incident or threat: what happened, when it happened (date and time), and who or what was involved. Avoid including your own name or details that could identify you."
+                    class="w-full resize-y rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-[15px] leading-relaxed outline-none transition placeholder:text-slate-400 focus:border-blue-700 focus:bg-white focus:ring-4 focus:ring-blue-700/15">{{ old('description') }}</textarea>
+                <p class="mt-1.5 text-xs text-slate-500">Only share what you are comfortable sharing.</p>
+                @error('description') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+            </div>
+
+            <!-- Attach Proof -->
+            <div>
+                <label class="mb-2 block text-sm font-semibold text-blue-950">Attach Proof <span class="font-normal text-slate-500">(Picture or Video)</span></label>
+                <label id="dropzone" for="evidence"
+                    class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-blue-300 bg-blue-50/50 px-4 py-8 text-center transition hover:border-blue-700 hover:bg-blue-50">
+                    <span class="grid size-12 place-items-center rounded-full bg-blue-100 text-blue-800">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 8.25 12 3.75m0 0L7.5 8.25M12 3.75v13.5"/>
+                        </svg>
+                    </span>
+                    <span id="file-label" class="text-sm font-semibold text-blue-800">Upload photo/video evidence (PNG, JPG, MP4, MOV)</span>
+                    <span class="text-xs text-slate-500">Click to browse or drag files here</span>
+                    <input id="evidence" type="file" name="evidence[]" multiple accept="image/*,video/*" class="hidden" onchange="previewFiles(this)">
+                </label>
+
+                <!-- Dynamic File Names Display -->
+                <div id="file-list" class="mt-3 space-y-2"></div>
+
+                @error('evidence') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                @error('evidence.*') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+            </div>
+
+            <!-- Terms and Submit -->
+            <div class="space-y-5 border-t border-slate-100 pt-7">
+                <div>
+                    <div class="flex items-start gap-3 rounded-xl bg-slate-50 px-4 py-3.5">
+                        <input type="checkbox" name="agree_terms" id="agree_terms" required class="mt-1 size-4 rounded accent-blue-900">
+                        <label for="agree_terms" class="text-sm text-slate-600">
+                            I have read and agree to the
+                            <a href="{{ route('terms') }}" target="_blank" class="font-semibold text-blue-700 underline hover:text-blue-900">Terms and Conditions</a>.
+                        </label>
+                    </div>
+                    @error('agree_terms') <small class="mt-2 block text-red-600">{{ $message }}</small> @enderror
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-red-600 to-red-700 py-4 font-bold uppercase tracking-wide text-white shadow-lg shadow-red-600/30 transition hover:from-red-700 hover:to-red-800">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        Submit Report
+                    </button>
+                    <p class="mt-3 text-center text-xs text-slate-500">Your report goes directly to the administration.</p>
+                </div>
             </div>
         </div>
-
-        <!-- Terms and Conditions -->
-        <div class="flex items-start gap-2 mb-4">
-            <input type="checkbox" name="agree_terms" id="agree_terms" required class="mt-1">
-            <label for="agree_terms" class="text-sm text-slate-600">
-                I have read and agree to the
-                <a href="{{ route('terms') }}" target="_blank" class="underline text-blue-700 hover:text-blue-900">Terms and Conditions</a>.
-            </label>
-        </div>
-        @error('agree_terms') <small class="text-red-600 block mb-2">{{ $message }}</small> @enderror
-
-        <!-- Submit -->
-        <button type="submit"
-            class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold tracking-wide py-3.5 rounded-xl shadow-lg shadow-red-600/30 transition uppercase">
-            Submit Report
-        </button>
     </form>
+</div>
 </div>
 
 <!-- Footer -->
@@ -225,6 +252,8 @@
 
 <!-- JS File Preview Handler & Form Reset -->
 <script>
+const DEFAULT_LABEL = "Upload photo/video evidence (PNG, JPG, MP4, MOV)";
+
 function previewFiles(input) {
     const label = document.getElementById('file-label');
     const fileListContainer = document.getElementById('file-list');
@@ -232,24 +261,62 @@ function previewFiles(input) {
 
     if (input.files && input.files.length > 0) {
         label.textContent = `${input.files.length} file(s) selected`;
-        label.classList.add('text-emerald-700', 'font-bold');
 
-        Array.from(input.files).forEach((file, index) => {
-            const item = document.createElement('p');
-            item.textContent = `✓ ${index + 1}. ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
-            fileListContainer.appendChild(item);
+        Array.from(input.files).forEach((file) => {
+            const chip = document.createElement('div');
+            chip.className = 'flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-800';
+
+            const check = document.createElement('span');
+            check.className = 'font-bold';
+            check.textContent = '✓';
+
+            const name = document.createElement('span');
+            name.className = 'min-w-0 flex-1 truncate font-semibold';
+            name.textContent = file.name;
+
+            const size = document.createElement('span');
+            size.className = 'text-emerald-600';
+            size.textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+
+            chip.append(check, name, size);
+            fileListContainer.appendChild(chip);
         });
     } else {
-        label.textContent = "Upload photo/video evidence (PNG, JPG, MP4, MOV)";
-        label.classList.remove('text-emerald-700', 'font-bold');
+        label.textContent = DEFAULT_LABEL;
     }
 }
+
+// Live character counter
+const descBox = document.getElementById('description');
+const descCount = document.getElementById('desc-count');
+function updateCount() { descCount.textContent = descBox.value.length + ' characters'; }
+descBox.addEventListener('input', updateCount);
+updateCount();
+
+// Drag and drop
+const zone = document.getElementById('dropzone');
+const evidenceInput = document.getElementById('evidence');
+['dragenter', 'dragover'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault();
+    zone.classList.add('border-blue-700', 'bg-blue-50');
+}));
+['dragleave', 'drop'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault();
+    zone.classList.remove('border-blue-700', 'bg-blue-50');
+}));
+zone.addEventListener('drop', e => {
+    if (e.dataTransfer.files.length) {
+        evidenceInput.files = e.dataTransfer.files;
+        previewFiles(evidenceInput);
+    }
+});
 
 window.addEventListener('pageshow', function(event) {
     if (event.persisted) {
         document.getElementById('report-form').reset();
         document.getElementById('file-list').innerHTML = '';
-        document.getElementById('file-label').textContent = "Upload photo/video evidence (PNG, JPG, MP4, MOV)";
+        document.getElementById('file-label').textContent = DEFAULT_LABEL;
+        updateCount();
     }
 });
 </script>

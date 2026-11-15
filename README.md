@@ -22,6 +22,7 @@
 - **Fast Reporting**: Select the incident type, fill in the details, and submit the report right away.
 - **Track Report**: Reporters receive a tracking code they can use to check the status of their report.
 - **Direct Action**: Every submitted report goes directly to the administration for prompt response.
+- **Faculty Interface**: Verified faculty members can log in to view submitted reports.
 - **Admin Dashboard**: Admins can log in to view, prioritize, update, and manage submitted reports.
 
 ## Technologies Used

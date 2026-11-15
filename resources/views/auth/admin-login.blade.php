@@ -1,86 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @include('partials.head')
     <title>SafeReport - Admin Login</title>
-    @vite('resources/css/app.css')
 </head>
-<body class="bg-slate-50 min-h-screen flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
+<body class="min-h-screen bg-slate-50 text-[#1e2a4a] antialiased flex items-center justify-center p-6">
 
-    <!-- Header Section -->
-    <div class="text-center mb-8">
-        <!-- CCDI Logo -->
-        <img src="{{ asset('logo/logo.jpg') }}" alt="CCDI Logo" class="w-16 h-16 mx-auto mb-3 rounded-full object-cover border-2 border-red-600 shadow-md">
-        
-        <h1 class="text-2xl font-black tracking-wide text-blue-950">
-            SAFEREPORT<span class="text-red-500">.</span>
-        </h1>
-        <p class="text-slate-500 text-sm font-medium mt-1">Admin Portal Login</p>
-    </div>
+    <main class="w-full max-w-4xl grid md:grid-cols-[1.1fr_1fr] bg-white rounded-[28px] shadow-2xl shadow-[#14204a]/20 overflow-hidden">
 
-    <!-- Login Card -->
-    <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
-        
-        <!-- Flash Messages / Errors -->
-        @if(session('error'))
-            <div class="bg-red-50 text-red-600 p-3 rounded-lg text-sm mb-4 border border-red-200">
-                {{ session('error') }}
+        {{-- Left panel: same navy hero style as the landing page --}}
+        <section class="flex flex-col justify-between gap-10 p-8 md:p-12 text-white bg-gradient-to-b from-[#14204a] via-[#26408b] to-[#14204a]">
+            <div class="flex items-center gap-3">
+                <img src="{{ asset('logo/logo.jpg') }}" alt="CCDI logo"
+                     class="size-14 rounded-full bg-white object-contain ring-2 ring-red-600">
+                <div class="leading-tight">
+                    <div class="text-xl font-extrabold tracking-wide">SAFEREPORT<span class="text-red-500">.</span></div>
+                    <div class="text-[10px] uppercase tracking-wide text-blue-100">Computer Communication Development Institute</div>
+                </div>
             </div>
-        @endif
 
-        <form action="{{ route('login') }}" method="POST" class="space-y-5" autocomplete="off">
-            @csrf
-
-            <!-- Email Address -->
             <div>
-                <label for="email" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                    Email Address
-                </label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="off"
-                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/30 focus:bg-white focus:border-blue-900 focus:ring-2 focus:ring-blue-900/20 text-slate-800 text-sm transition outline-none"
-                    placeholder="admin@ccdi.edu.ph">
-                @error('email')
-                    <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
-                @enderror
+                <h1 class="text-4xl md:text-5xl font-extrabold leading-[1.08] tracking-tight mb-4">
+                    Review Reports, <span class="text-red-500">Protect</span> Our School.
+                </h1>
+                <p class="text-blue-100 text-lg leading-relaxed">Every report stays safe and confidential.</p>
             </div>
 
-            <!-- Password -->
-            <div>
-                <label for="password" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                    Password
-                </label>
-                <input type="password" id="password" name="password" required autocomplete="new-password"
-                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/30 focus:bg-white focus:border-blue-900 focus:ring-2 focus:ring-blue-900/20 text-slate-800 text-sm transition outline-none"
-                    placeholder="••••••••••••">
-                @error('password')
-                    <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
-                @enderror
+            <div class="flex flex-wrap gap-2.5">
+                <span class="text-xs font-semibold border border-white/40 bg-white/10 rounded-full px-3.5 py-2">100% Anonymous</span>
+                <span class="text-xs font-semibold border border-white/40 bg-white/10 rounded-full px-3.5 py-2">Fast Reporting</span>
+                <span class="text-xs font-semibold border border-white/40 bg-white/10 rounded-full px-3.5 py-2">Direct Action</span>
             </div>
+        </section>
 
-            <!-- Remember Me -->
-            <div class="flex items-center">
-                <input type="checkbox" id="remember" name="remember" 
-                    class="w-4 h-4 text-blue-900 border-slate-300 rounded focus:ring-blue-900">
-                <label for="remember" class="ml-2 text-xs text-slate-600 font-medium">
+        {{-- Right panel --}}
+        <section class="flex flex-col justify-center p-8 md:p-12">
+            <h2 class="text-3xl font-extrabold text-[#14204a] mb-1.5">Admin Portal Login</h2>
+            <p class="text-sm text-slate-500 mb-7">Sign in with your admin account to manage reports.</p>
+
+            <form method="POST" action="{{ url('/admin/login') }}" class="space-y-5">
+                @csrf
+
+                @if ($errors->any())
+                    <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-700">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+
+                <div>
+                    <label for="email" class="block mb-2 text-xs font-semibold uppercase tracking-wider">Email address</label>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                        placeholder="admin@ccdi.edu.ph"
+                        class="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-[15px] outline-none transition focus:border-[#26408b] focus:ring-4 focus:ring-[#26408b]/15">
+                </div>
+
+                <div>
+                    <label for="password" class="block mb-2 text-xs font-semibold uppercase tracking-wider">Password</label>
+                    <input id="password" type="password" name="password" required
+                        placeholder="Enter your password"
+                        class="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-[15px] outline-none transition focus:border-[#26408b] focus:ring-4 focus:ring-[#26408b]/15">
+                </div>
+
+                <label class="flex items-center gap-2.5 text-sm">
+                    <input type="checkbox" name="remember" class="size-[18px] rounded accent-[#14204a]">
                     Remember me
                 </label>
-            </div>
 
-            <!-- Submit Button -->
-            <button type="submit" 
-                class="w-full bg-blue-950 hover:bg-blue-900 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition duration-200 tracking-wider text-sm uppercase">
-                LOG IN
-            </button>
-        </form>
-    </div>
+                <button type="submit"
+                    class="w-full rounded-xl bg-red-600 py-4 text-[15px] font-bold text-white shadow-lg shadow-red-600/30 transition hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                    Log in
+                </button>
+            </form>
 
-    <!-- Back Link -->
-    <div class="mt-8 text-center">
-        <a href="/" class="text-xs font-semibold text-blue-900 hover:underline transition flex items-center justify-center gap-1">
-            &larr; Back to SafeReport
-        </a>
-    </div>
+            <p class="mt-6 text-center text-sm">
+                <a href="{{ url('/') }}" class="font-semibold text-[#26408b] hover:underline">&larr; Back to SafeReport</a>
+            </p>
+        </section>
+    </main>
 
 </body>
 </html>
