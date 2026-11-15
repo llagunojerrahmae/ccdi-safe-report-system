@@ -26,14 +26,15 @@
             <h2 class="text-blue-950 font-bold text-lg mb-2">Who We Are</h2>
             <p>
                 SafeReport is a web-based anonymous incident and threat reporting system of the
-                Computer Communication Development Institute (CCDI). It gives students, teachers, and staff
-                a safe and confidential way to report any incident or threat within the school, without fear
-                of their identity being revealed.
+                Computer Communication Development Institute (CCDI). It gives CCDI students
+                a safe and confidential way to report incidents, threats, and safety concerns within the school,
+                without fear of their identity being revealed.
             </p>
             <p class="mt-3">
-                The system replaces informal and face-to-face reporting, which many people avoid because of
-                fear, embarrassment, or concern about retaliation, with a simple online form that anyone
-                can use from any device with an internet connection.
+                The system offers an additional way to report besides approaching a teacher or the Disciplinary Office
+                in person, which some students avoid because of fear, embarrassment, or concern about
+                retaliation. It is a simple online form that students can use from any device with an
+                internet connection. It does not replace the existing disciplinary processes of CCDI.
             </p>
         </div>
 
@@ -42,13 +43,13 @@
             <h2 class="text-blue-950 font-bold text-lg mb-2">Why We Built SafeReport</h2>
             <p>
                 Many incidents in schools, such as bullying, harassment, theft, vandalism, and threats, go
-                unreported because people are afraid to speak up. When concerns are not reported, they cannot
-                be addressed, and the school community becomes less safe for everyone.
+                unreported because students are afraid to speak up. When concerns are not reported, they cannot
+                be addressed, and the school community becomes less safe.
             </p>
             <p class="mt-3">
                 SafeReport was created to remove that barrier. By making reporting anonymous, fast, and
-                trackable, the system encourages more people to come forward and helps the administration
-                respond to concerns on time.
+                trackable, the system encourages more students to come forward and helps authorized school
+                personnel respond to concerns on time.
             </p>
         </div>
 
@@ -63,7 +64,7 @@
                 <h2 class="text-blue-950 font-bold text-lg mb-2">Our Mission</h2>
                 <p>
                     To provide a simple, secure, and anonymous channel for reporting incidents, so that every
-                    concern is heard and acted on without exposing the identity of the reporter.
+                    concern is heard and acted on by authorized personnel without exposing the identity of the reporter.
                 </p>
             </div>
 
@@ -76,7 +77,7 @@
                 </div>
                 <h2 class="text-blue-950 font-bold text-lg mb-2">Our Vision</h2>
                 <p>
-                    A safe and supportive school community where everyone feels confident to speak up, and
+                    A safe and supportive school community where students feel confident to speak up, and
                     where concerns are handled with care, fairness, and confidentiality.
                 </p>
             </div>
@@ -88,11 +89,11 @@
             <ul class="space-y-2">
                 <li class="flex gap-3">
                     <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-red-600"></span>
-                    <span>Provide an anonymous way for students, teachers, and staff to report incidents and threats.</span>
+                    <span>Provide an anonymous way for CCDI students to report incidents, threats, and safety concerns.</span>
                 </li>
                 <li class="flex gap-3">
                     <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-red-600"></span>
-                    <span>Allow reporters to attach photo or video evidence to support their report.</span>
+                    <span>Allow students to attach supporting evidence, such as screenshots or photos, to their report.</span>
                 </li>
                 <li class="flex gap-3">
                     <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-red-600"></span>
@@ -100,7 +101,7 @@
                 </li>
                 <li class="flex gap-3">
                     <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-red-600"></span>
-                    <span>Help the CCDI administration receive, review, and respond to reports in one organized place.</span>
+                    <span>Help authorized CCDI personnel receive, review, prioritize, and update the status of reports in one organized place.</span>
                 </li>
             </ul>
         </div>
@@ -125,7 +126,7 @@
                         </svg>
                     </div>
                     <p class="text-blue-950 font-bold mt-3">Safety</p>
-                    <p class="text-xs mt-1">A safer school environment for everyone.</p>
+                    <p class="text-xs mt-1">A safer school environment for students.</p>
                 </div>
                 <div class="bg-slate-50 rounded-xl p-5 text-center border border-slate-100">
                     <div class="w-12 h-12 mx-auto rounded-full bg-blue-100 flex items-center justify-center">
@@ -134,7 +135,7 @@
                         </svg>
                     </div>
                     <p class="text-blue-950 font-bold mt-3">Action</p>
-                    <p class="text-xs mt-1">Reports go straight to the administration for response.</p>
+                    <p class="text-xs mt-1">Reports go straight to authorized personnel for response.</p>
                 </div>
             </div>
         </div>
@@ -145,7 +146,7 @@
             <p>
                 SafeReport collects only the information needed to process a report: the incident type,
                 location, description, and any evidence you choose to attach. It does not ask for your name,
-                student number, or email address. Reports are viewed only by authorized administrators.
+                student number, or email address. Reports are viewed only by authorized personnel.
             </p>
             <p class="mt-3">
                 To protect yourself further, avoid including names or details in your description that could
@@ -157,12 +158,12 @@
         <!-- What Can Be Reported -->
         <div class="bg-white rounded-2xl shadow-xl p-8 border border-slate-100 text-slate-600 text-sm leading-relaxed">
             <h2 class="text-blue-950 font-bold text-lg mb-2">What Can Be Reported</h2>
-            <p>You may use SafeReport to report any incident or threat within the school, such as:</p>
+            <p>Students may use SafeReport to report incidents, threats, and safety concerns within the school, such as:</p>
             <div class="flex flex-wrap gap-2 mt-3">
-                <span class="bg-blue-100 text-blue-900 text-xs font-semibold px-3 py-1.5 rounded-full">Bullying</span>
+                <span class="bg-blue-100 text-blue-900 text-xs font-semibold px-3 py-1.5 rounded-full">Bullying (including cyberbullying)</span>
                 <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1.5 rounded-full">Harassment</span>
                 <span class="bg-blue-100 text-blue-900 text-xs font-semibold px-3 py-1.5 rounded-full">Theft</span>
-                <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1.5 rounded-full">Threats</span>
+                <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1.5 rounded-full">Possession of deadly weapons</span>
                 <span class="bg-blue-100 text-blue-900 text-xs font-semibold px-3 py-1.5 rounded-full">Vandalism</span>
                 <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1.5 rounded-full">Other safety concerns</span>
             </div>
@@ -186,7 +187,7 @@
         <!-- Call to Action -->
         <div class="bg-gradient-to-r from-blue-950 to-blue-900 rounded-2xl shadow-xl p-8 text-center">
             <h2 class="text-white font-extrabold text-xl">Have a concern? Speak up safely.</h2>
-            <p class="text-blue-200 text-sm mt-2">Your report is anonymous and goes directly to the administration.</p>
+            <p class="text-blue-200 text-sm mt-2">Your report is anonymous and goes directly to authorized school personnel.</p>
             <div class="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a href="{{ url('/') }}#report-section"
                    class="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition">

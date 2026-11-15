@@ -27,12 +27,12 @@
 
         <div>
             <h2 class="text-blue-950 font-bold text-base mb-1">2. Purpose of the System</h2>
-            <p>SafeReport is a web-based system of the Computer Communication Development Institute (CCDI) that allows students, teachers, and staff to report incidents or threats within the school safely and confidentially.</p>
+            <p>SafeReport is a web-based system of the Computer Communication Development Institute (CCDI) that allows CCDI students to report incidents, threats, and safety concerns within the school safely and confidentially.</p>
         </div>
 
         <div>
             <h2 class="text-blue-950 font-bold text-base mb-1">3. Anonymity and Confidentiality</h2>
-            <p>SafeReport does not require your name or personal details to submit a report. Reports are accessible only to authorized school administrators and will be used only to investigate and respond to the concern. Please do not include personal information that could identify you unless you choose to.</p>
+            <p>SafeReport does not require your name or personal details to submit a report. Reports are accessible only to authorized school personnel and will be used only to investigate and respond to the concern. Please do not include personal information that could identify you unless you choose to.</p>
         </div>
 
         <div>
@@ -48,7 +48,7 @@
 
         <div>
             <h2 class="text-blue-950 font-bold text-base mb-1">5. Report Handling</h2>
-            <p>Submitted reports are reviewed by the CCDI administration. Submission does not guarantee a specific outcome or response time. Each report receives a tracking code that you may use in the "Track Report" page to check its status. Keep this code safe, as it cannot be recovered if lost.</p>
+            <p>Submitted reports are reviewed by authorized CCDI personnel. SafeReport does not replace the existing disciplinary processes of CCDI, and any investigation or action remains with authorized personnel. Submission does not guarantee a specific outcome or response time. Each report receives a tracking code that you may use in the "Track Report" page to check its status. Keep this code safe, as it cannot be recovered if lost.</p>
         </div>
 
         <div>
@@ -73,7 +73,7 @@
 
         <div>
             <h2 class="text-blue-950 font-bold text-base mb-1">10. Contact</h2>
-            <p>For questions about these Terms, please visit the Contact page or reach the CCDI administration.</p>
+            <p>For questions about these Terms, please visit the Contact page or reach authorized CCDI personnel.</p>
         </div>
     </div>
 

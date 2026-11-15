@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Home at Report Form Creation
-Route::get('/', [ReportController::class, 'create'])->name('report.create');
-Route::get('/report', [ReportController::class, 'create']);
+Route::view('/', 'report.home')->name('home');
+Route::get('/report/create', [ReportController::class, 'create'])->name('report.create');
+Route::get('/report', fn () => redirect()->route('report.create'));
 Route::post('/report', [ReportController::class, 'store'])->name('report.store');
 
 // Success Page (Dito ipapakita ang Tracking Code)
