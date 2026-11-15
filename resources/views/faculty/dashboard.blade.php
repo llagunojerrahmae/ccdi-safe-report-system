@@ -43,19 +43,37 @@
 <!-- Hero -->
 <section class="bg-gradient-to-b from-blue-900 to-blue-800 text-white text-center py-12 px-6">
     <h2 class="text-4xl font-extrabold">Faculty <span class="text-red-500">Dashboard</span></h2>
-    <p class="mt-2 text-blue-100">Mga anonymous na report mula sa mga estudyante.</p>
+    <p class="mt-2 text-blue-100">Anonymous reports from students.</p>
 </section>
 
 <main class="max-w-3xl mx-auto px-6 py-10">
 
     @if ($newCount > 0)
         <span class="inline-block bg-red-600 text-white font-bold px-5 py-2 rounded-full shadow-lg shadow-red-600/30 mb-6">
-            {{ $newCount }} bagong report
+            {{ $newCount }} new report
         </span>
     @endif
 
+    {{-- NEW: Search bar --}}
+    <div class="relative mb-6">
+        <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"/>
+        </svg>
+        <input
+            type="text"
+            id="reportSearch"
+            placeholder="Search for a report (type, room, description...)"
+            autocomplete="off"
+            class="w-full pl-12 pr-4 py-3 rounded-2xl border border-slate-200 bg-white shadow-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        >
+    </div>
+
+    {{-- NEW: Walang nahanap message --}}
+    <p id="noResults" class="hidden text-center text-slate-500 py-10">Walang nahanap na report.</p>
+
     @forelse ($reports as $report)
-        <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 mb-4">
+        {{-- NEW: dinagdag ang "report-card" class --}}
+        <div class="report-card bg-white rounded-2xl shadow-md border border-slate-100 p-6 mb-4">
             <h3 class="text-blue-950 font-bold text-lg capitalize">{{ str_replace('_', ' ', $report->incident_type) }}</h3>
             @if ($report->location)
                 <p class="text-slate-500 text-sm mt-0.5">📍 {{ $report->location }}</p>
@@ -103,6 +121,26 @@
         {{ $reports->links() }}
     </div>
 </main>
+
+{{-- NEW: Search script --}}
+<script>
+    const searchInput = document.getElementById('reportSearch');
+    const noResults = document.getElementById('noResults');
+
+    searchInput.addEventListener('input', function () {
+        const keyword = this.value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.report-card');
+        let visible = 0;
+
+        cards.forEach(card => {
+            const match = card.innerText.toLowerCase().includes(keyword);
+            card.classList.toggle('hidden', !match);
+            if (match) visible++;
+        });
+
+        noResults.classList.toggle('hidden', visible > 0 || cards.length === 0);
+    });
+</script>
 
 </body>
 </html>
