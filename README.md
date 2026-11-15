@@ -64,8 +64,3 @@
    npm run dev
    ```
 7. Open `http://127.0.0.1:8000` in your browser.
-
-## Admin Login
-
-- Email: `[admin email]`
-- Password: `[admin password]`
