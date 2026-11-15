@@ -21,7 +21,12 @@ class User extends Authenticatable // implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'faculty_id',
+        'department',
         'password',
+        'role',
+        'status',
+        'faculty_last_seen_at',
     ];
 
     /**
@@ -44,6 +49,7 @@ class User extends Authenticatable // implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'faculty_last_seen_at' => 'datetime',
         ];
     }
 
@@ -56,5 +62,20 @@ class User extends Authenticatable // implements MustVerifyEmail
             ->explode(' ')
             ->map(fn (string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isFaculty(): bool
+    {
+        return $this->role === 'faculty';
+    }
+
+    public function isApprovedFaculty(): bool
+    {
+        return $this->role === 'faculty' && $this->status === 'approved';
     }
 }

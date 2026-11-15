@@ -21,6 +21,17 @@ class AdminLoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            // Admin lang ang puwede dito
+            if (Auth::user()->role !== 'admin') {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()->withErrors([
+                    'email' => 'This login is for administrators only.',
+                ]);
+            }
+
             $request->session()->regenerate();
             return redirect()->intended('/admin/dashboard');
         }

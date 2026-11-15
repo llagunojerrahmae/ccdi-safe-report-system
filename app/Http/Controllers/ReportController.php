@@ -15,7 +15,7 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-        // 1. Loose validation 
+        // 1. Loose validation para hindi humarang sa submission
         $validated = $request->validate([
             'incident_type' => 'required',
             'location'      => 'required|string',
@@ -46,7 +46,7 @@ class ReportController extends Controller
             'status'         => 'pending',
         ]);
 
-        // 5. Direct redirect in success route
+        // 5. Direct redirect sa success route
         return redirect()->route('report.success', ['trackingCode' => $report->tracking_code]);
     }
 

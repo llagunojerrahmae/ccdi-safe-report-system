@@ -19,6 +19,7 @@ class Report extends Model
         'evidence_paths',
         'status',
         'priority',
+        'reporter_type',
     ];
 
     protected $casts = [

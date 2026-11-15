@@ -18,7 +18,17 @@
     </div>
 
     <nav class="flex-1 px-4 py-6 space-y-1">
+        @php
+            $pendingFaculty = \App\Models\User::where('role', 'faculty')->where('status', 'pending')->count();
+        @endphp
+
         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-blue-900 transition text-sm">Dashboard</a>
+        <a href="{{ route('admin.faculty') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-blue-900 transition text-sm">
+            Faculty Requests
+            @if ($pendingFaculty > 0)
+                <span class="ml-auto bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ $pendingFaculty }}</span>
+            @endif
+        </a>
         <a href="{{ route('report.create') }}" target="_blank" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-blue-900 transition text-sm">View Public Form</a>
         <a href="{{ route('admin.archive') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-blue-900 text-white font-medium text-sm">Archive</a>
     </nav>

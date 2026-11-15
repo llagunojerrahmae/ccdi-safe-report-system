@@ -27,11 +27,16 @@
             <a href="{{ route('terms') }}" class="hover:text-white transition">Terms</a>
         </div>
 
-        <a href="/admin/login"
-           class="border border-blue-300 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white hover:text-blue-900 transition">
-            Admin Login
-        </a>
-    </div>
+        <div class="flex items-center gap-3">
+    <a href="{{ route('faculty.login') }}"
+       class="bg-white/10 border border-blue-300 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white hover:text-blue-900 transition">
+        Faculty Login
+    </a>
+    <a href="/admin/login"
+       class="border border-blue-300 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white hover:text-blue-900 transition">
+        Admin Login
+    </a>
+</div>
 </nav>
 
 <!-- Hero -->
