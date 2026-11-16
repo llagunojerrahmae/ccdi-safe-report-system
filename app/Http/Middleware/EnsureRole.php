@@ -12,7 +12,6 @@ class EnsureRole
     {
         $user = $request->user();
 
-        // Hindi naka-login: ihatid sa tamang login page
         if (! $user) {
             return redirect()->route($role === 'faculty' ? 'faculty.login' : 'login');
         }
@@ -21,7 +20,6 @@ class EnsureRole
             abort(403, 'Unauthorized.');
         }
 
-        // Ang faculty ay dapat approved para makapasok
         if ($role === 'faculty' && $user->status !== 'approved') {
             abort(403, 'Your faculty account is not approved.');
         }

@@ -3,8 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeReport</title>
+    <title>SafeReport - Anonymous School Incident Reporting</title>
     @vite('resources/css/app.css')
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-glow { background:
+            radial-gradient(60rem 30rem at 50% -10%, rgba(59,130,246,.35), transparent 60%),
+            linear-gradient(to bottom, #172554, #1e3a8a 70%, #1e3a8a); }
+        .hero-grid { background-image:
+            linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 44px 44px;
+            -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%); }
+        .pulse-ring { animation: pulse-ring 2.4s ease-out infinite; }
+        @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(220,38,38,.55);} 100% { box-shadow: 0 0 0 18px rgba(220,38,38,0);} }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+        .reveal.show { opacity: 1; transform: none; }
+        .step-panel { display: none; }
+        .step-panel.active { display: grid; animation: fadein .35s ease; }
+        @keyframes fadein { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: none;} }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] .chev { transform: rotate(180deg); }
+        @media (prefers-reduced-motion: reduce) {
+            .pulse-ring, .step-panel.active { animation: none; }
+            .reveal { opacity: 1; transform: none; transition: none; }
+            html { scroll-behavior: auto; }
+        }
+    </style>
 </head>
 <body class="bg-slate-50">
 
@@ -40,171 +67,175 @@
 </nav>
 
 <!-- Hero -->
-<div class="bg-gradient-to-b from-blue-950 via-blue-900 to-slate-800 pb-24 pt-16 px-6 text-center relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top,white,transparent_60%)]"></div>
-    <h2 class="relative text-white text-4xl md:text-5xl font-extrabold leading-tight max-w-3xl mx-auto">
-        Report a Concern, <span class="text-red-500">Protect</span> Our School.
-    </h2>
-    <p class="relative text-blue-200 mt-4 text-lg">Submit an anonymous report safely and confidentially.</p>
+<header class="hero-glow relative overflow-hidden">
+    <div class="hero-grid absolute inset-0"></div>
+    <div class="relative max-w-4xl mx-auto px-6 pt-20 pb-32 text-center">
+        <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
+            Report a Concern, <span class="text-red-500">Protect</span> Our School.
+        </h2>
+        <p class="mt-5 text-lg md:text-xl text-blue-100">Submit an anonymous report safely and confidentiality.</p>
 
-    <div class="relative mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="{{ route('report.create') }}"
-           class="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold text-base px-8 py-3.5 rounded-xl shadow-lg shadow-red-900/40 transition hover:-translate-y-0.5">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z"/>
-            </svg>
-            Submit a Report
-        </a>
-
-        <a href="{{ route('report.track') }}"
-           class="inline-flex items-center gap-2 border-2 border-blue-300 text-white hover:bg-white hover:text-blue-900 font-semibold text-base px-8 py-3.5 rounded-xl transition hover:-translate-y-0.5">
-            Track Your Report
-        </a>
-    </div>
-</div>
-
-<!-- Description / About Section -->
-<div class="max-w-5xl mx-auto px-6 py-16">
-    <div class="grid md:grid-cols-3 gap-8 text-center">
-        <div class="bg-white rounded-xl shadow-md p-6 border border-slate-100">
-            <div class="w-14 h-14 mx-auto rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                <svg class="w-7 h-7 text-blue-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                </svg>
-            </div>
-            <h3 class="font-bold text-slate-800 mb-2">100% Anonymous</h3>
-            <p class="text-slate-500 text-sm">No personal information about the reporter is collected or stored. Every submission is safe and confidential.</p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md p-6 border border-slate-100">
-            <div class="w-14 h-14 mx-auto rounded-full bg-red-100 flex items-center justify-center mb-4">
-                <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
-                </svg>
-            </div>
-            <h3 class="font-bold text-slate-800 mb-2">Fast Reporting</h3>
-            <p class="text-slate-500 text-sm">A simple process — select the incident type, fill in the details, and submit your report right away.</p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md p-6 border border-slate-100">
-            <div class="w-14 h-14 mx-auto rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                <svg class="w-7 h-7 text-blue-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-            </div>
-            <h3 class="font-bold text-slate-800 mb-2">Direct Action</h3>
-            <p class="text-slate-500 text-sm">Every submitted report goes directly to the administration for prompt response.</p>
+        <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="{{ route('report.create') }}"
+               class="pulse-ring inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-red-600 to-red-700 px-7 py-3.5 font-bold text-white shadow-lg shadow-red-900/40 transition hover:from-red-700 hover:to-red-800 hover:-translate-y-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Submit a Report
+            </a>
+            <a href="{{ route('report.track') }}"
+               class="inline-flex items-center rounded-lg border-2 border-blue-300 px-7 py-3 font-bold text-white transition hover:bg-white hover:text-blue-900 hover:-translate-y-0.5">
+                Track Your Report
+            </a>
         </div>
     </div>
-</div>
+</header>
 
-<!-- How It Works -->
-<section class="bg-white border-y border-slate-100">
-    <div class="max-w-5xl mx-auto px-6 py-16">
-        <div class="text-center mb-14">
-            <h2 class="text-blue-950 font-extrabold text-3xl">How It Works</h2>
-            <p class="text-slate-500 text-sm mt-2">Three simple steps to report a concern.</p>
+<!-- Trust strip (overlaps hero) -->
+<section class="relative -mt-14 px-6">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 rounded-2xl border border-slate-200 bg-white shadow-xl shadow-blue-950/10">
+        <div class="flex items-center gap-4 p-6">
+            <span class="grid size-12 shrink-0 place-items-center rounded-full bg-blue-100 text-blue-900">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+            <div><p class="font-bold text-blue-950">100% Anonymous</p><p class="text-sm text-slate-500">No name or personal data collected.</p></div>
+        </div>
+        <div class="flex items-center gap-4 p-6">
+            <span class="grid size-12 shrink-0 place-items-center rounded-full bg-red-100 text-red-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v6m0 3.5v.01"/></svg>
+            </span>
+            <div><p class="font-bold text-blue-950">Fast Reporting</p><p class="text-sm text-slate-500">Four fields, done in minutes.</p></div>
+        </div>
+        <div class="flex items-center gap-4 p-6">
+            <span class="grid size-12 shrink-0 place-items-center rounded-full bg-blue-100 text-blue-900">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 12.5l3 3 5-6"/></svg>
+            </span>
+            <div><p class="font-bold text-blue-950">Direct Action</p><p class="text-sm text-slate-500">Goes straight to the administration.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section class="max-w-5xl mx-auto px-6 pt-20 reveal">
+    <div class="grid items-center gap-10 md:grid-cols-5">
+        <div class="md:col-span-3">
+            <h3 class="text-3xl font-extrabold text-blue-950">What is SafeReport?</h3>
+            <div class="mt-3 h-1 w-14 rounded-full bg-red-600"></div>
+            <p class="mt-6 text-[17px] leading-relaxed text-slate-600">
+                <span class="font-semibold text-blue-900">SafeReport</span> is a web-based system by the
+                <span class="font-semibold text-blue-950">Computer Communication Development Institute (CCDI)</span>.
+                It gives students a safe and confidential way to report any incident or threat within the school.
+            </p>
+            <p class="mt-4 text-[17px] leading-relaxed text-slate-600">
+                You can speak up without fear of your identity being revealed.
+            </p>
         </div>
 
-        <div class="relative grid md:grid-cols-3 gap-10">
-            <div class="hidden md:block absolute top-8 left-[16.66%] right-[16.66%] border-t-2 border-dashed border-blue-200"></div>
+        <div class="md:col-span-2 rounded-3xl bg-gradient-to-b from-blue-950 to-blue-800 p-7 text-white shadow-xl shadow-blue-950/20">
+            <div class="mb-5 grid size-12 place-items-center rounded-full bg-white/15 ring-1 ring-white/40">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <ul class="space-y-3.5 text-sm">
+                <li class="flex items-start gap-3"><span class="mt-0.5 font-bold text-emerald-300">✓</span><span>Open to all CCDI students</span></li>
+                <li class="flex items-start gap-3"><span class="mt-0.5 font-bold text-emerald-300">✓</span><span>No name or personal data collected</span></li>
+                <li class="flex items-start gap-3"><span class="mt-0.5 font-bold text-emerald-300">✓</span><span>Reviewed directly by the administration</span></li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-            <div class="relative text-center px-2">
-                <div class="w-16 h-16 mx-auto rounded-full bg-blue-950 text-white font-extrabold text-2xl flex items-center justify-center shadow-lg ring-8 ring-white">1</div>
-                <h3 class="text-blue-950 font-bold text-lg mt-5">Fill Out the Form</h3>
-                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-                    Select the incident type, enter the location, and describe what happened. You may attach a photo or video as proof.
-                </p>
+<!-- How it works (interactive tabs) -->
+<section class="max-w-5xl mx-auto px-6 pt-20 reveal">
+    <h3 class="text-3xl font-extrabold text-blue-950 text-center">How reporting works</h3>
+    <p class="mt-2 text-center text-slate-500">Select a step to see what happens.</p>
+
+    <div class="mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-blue-950/10">
+        <div class="grid grid-cols-3 border-b border-slate-100 bg-slate-50" role="tablist">
+            <button type="button" role="tab" aria-selected="true" data-step="0" class="step-tab px-4 py-4 text-sm font-semibold transition border-b-4 border-red-600 text-blue-950">1. Fill in the report</button>
+            <button type="button" role="tab" aria-selected="false" data-step="1" class="step-tab px-4 py-4 text-sm font-semibold transition border-b-4 border-transparent text-slate-500 hover:text-blue-900">2. Get a tracking code</button>
+            <button type="button" role="tab" aria-selected="false" data-step="2" class="step-tab px-4 py-4 text-sm font-semibold transition border-b-4 border-transparent text-slate-500 hover:text-blue-900">3. Follow the progress</button>
+        </div>
+
+        <div class="p-8 md:p-10">
+            <div class="step-panel active gap-3" data-panel="0">
+                <h4 class="text-xl font-bold text-blue-950">Tell us what happened</h4>
+                <p class="text-slate-600 leading-relaxed">Choose the incident type, say where it happened, describe the event, and attach a photo or video if you have one. You never have to enter your name.</p>
+                <a href="{{ route('report.create') }}" class="mt-2 w-fit text-sm font-semibold text-blue-700 underline hover:text-blue-900">Start a report</a>
+            </div>
+            <div class="step-panel gap-3" data-panel="1">
+                <h4 class="text-xl font-bold text-blue-950">Keep your tracking code</h4>
+                <p class="text-slate-600 leading-relaxed">After you submit, the system gives you a tracking code. It is the only way to check your report later, so save it somewhere safe.</p>
+            </div>
+            <div class="step-panel gap-3" data-panel="2">
+                <h4 class="text-xl font-bold text-blue-950">See what the administration did</h4>
+                <p class="text-slate-600 leading-relaxed">Enter your tracking code on the Track Report page to see the current status and any updates, without logging in.</p>
+                <a href="{{ route('report.track') }}" class="mt-2 w-fit text-sm font-semibold text-blue-700 underline hover:text-blue-900">Track a report</a>
             </div>
 
-            <div class="relative text-center px-2">
-                <div class="w-16 h-16 mx-auto rounded-full bg-red-600 text-white font-extrabold text-2xl flex items-center justify-center shadow-lg ring-8 ring-white">2</div>
-                <h3 class="text-blue-950 font-bold text-lg mt-5">Submit and Get a Code</h3>
-                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-                    Agree to the Terms and Conditions, then submit. You will receive a tracking code. Keep it safe.
-                </p>
-            </div>
-
-            <div class="relative text-center px-2">
-                <div class="w-16 h-16 mx-auto rounded-full bg-blue-950 text-white font-extrabold text-2xl flex items-center justify-center shadow-lg ring-8 ring-white">3</div>
-                <h3 class="text-blue-950 font-bold text-lg mt-5">Track Your Report</h3>
-                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-                    Use your tracking code on the
-                    <a href="{{ route('report.track') }}" class="text-blue-700 underline hover:text-blue-900">Track Report</a>
-                    page to check the status of your report.
-                </p>
+            <div class="mt-8 h-1.5 overflow-hidden rounded-full bg-slate-100">
+                <div id="step-bar" class="h-full w-1/3 rounded-full bg-gradient-to-r from-blue-900 to-blue-700 transition-all duration-500"></div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- What you can report (expandable cards) -->
+<section class="max-w-5xl mx-auto px-6 pt-20 reveal">
+    <h3 class="text-3xl font-extrabold text-blue-950 text-center">What you can report</h3>
+    <p class="mt-2 text-center text-slate-500">Select a category to read more.</p>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+        @php
+            $types = [
+                ['Bullying', 'Including cyberbullying. Repeated hurtful behavior in person or online.'],
+                ['Harassment', 'Unwanted behavior that makes someone feel unsafe or uncomfortable.'],
+                ['Possession of Deadly Weapons', 'Any weapon brought onto school grounds. Report it as soon as you can.'],
+                ['Theft', 'Missing or stolen belongings of students, staff, or the school.'],
+                ['Vandalism', 'Damage to school property, facilities, or equipment.'],
+                ['Other Incidents or Threats', 'Anything else that puts the school community at risk.'],
+            ];
+        @endphp
+        @foreach ($types as $t)
+            <details class="group rounded-2xl border border-slate-200 bg-white px-6 py-4 shadow-sm transition hover:border-blue-300 hover:shadow-md">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold text-blue-950">
+                    {{ $t[0] }}
+                    <svg class="chev size-5 shrink-0 text-slate-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+                </summary>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600">{{ $t[1] }}</p>
+            </details>
+        @endforeach
+    </div>
+</section>
+
 <!-- FAQ -->
-<section class="max-w-3xl mx-auto px-6 py-14">
-    <div class="text-center mb-8">
-        <h2 class="text-blue-950 font-extrabold text-2xl">Frequently Asked Questions</h2>
-        <p class="text-slate-500 text-sm mt-1">Quick answers to common concerns.</p>
+<section class="max-w-3xl mx-auto px-6 pt-20 reveal">
+    <h3 class="text-3xl font-extrabold text-blue-950 text-center">Common questions</h3>
+    <div class="mt-8 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
+        @php
+            $faqs = [
+                ['Will anyone know it was me?', 'No. The form does not ask for your name or personal information. Avoid putting details in the description that could identify you.'],
+                ['What files can I attach?', 'Photos and videos (PNG, JPG, MP4, MOV). You can attach more than one file.'],
+                ['What if it is an emergency?', 'Do not rely on the online report. Go directly to the guidance office or school security personnel.'],
+            ];
+        @endphp
+        @foreach ($faqs as $f)
+            <details class="px-6 py-4">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold text-blue-950">
+                    {{ $f[0] }}
+                    <svg class="chev size-5 shrink-0 text-slate-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+                </summary>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600">{{ $f[1] }}</p>
+            </details>
+        @endforeach
     </div>
+</section>
 
-    <div class="space-y-3">
-        <details class="group bg-white rounded-xl shadow-md border border-slate-100 p-5">
-            <summary class="flex items-center justify-between cursor-pointer text-blue-950 font-semibold list-none">
-                Is my report really anonymous?
-                <span class="text-blue-900 transition group-open:rotate-180">&#9662;</span>
-            </summary>
-            <p class="text-slate-500 text-sm mt-3 leading-relaxed">
-                Yes. SafeReport does not require your name or any account. Please avoid including personal details that could identify you in your description.
-            </p>
-        </details>
-
-        <details class="group bg-white rounded-xl shadow-md border border-slate-100 p-5">
-            <summary class="flex items-center justify-between cursor-pointer text-blue-950 font-semibold list-none">
-                What happens after I submit a report?
-                <span class="text-blue-900 transition group-open:rotate-180">&#9662;</span>
-            </summary>
-            <p class="text-slate-500 text-sm mt-3 leading-relaxed">
-                Your report goes directly to the CCDI administration for review. You will receive a tracking code to check its status.
-            </p>
-        </details>
-
-        <details class="group bg-white rounded-xl shadow-md border border-slate-100 p-5">
-            <summary class="flex items-center justify-between cursor-pointer text-blue-950 font-semibold list-none">
-                What if I lose my tracking code?
-                <span class="text-blue-900 transition group-open:rotate-180">&#9662;</span>
-            </summary>
-            <p class="text-slate-500 text-sm mt-3 leading-relaxed">
-                Because reports are anonymous, the code cannot be recovered. Please save or write it down right after submitting.
-            </p>
-        </details>
-
-        <details class="group bg-white rounded-xl shadow-md border border-slate-100 p-5">
-            <summary class="flex items-center justify-between cursor-pointer text-blue-950 font-semibold list-none">
-                Can I attach photos or videos?
-                <span class="text-blue-900 transition group-open:rotate-180">&#9662;</span>
-            </summary>
-            <p class="text-slate-500 text-sm mt-3 leading-relaxed">
-                Yes. You may upload photo or video evidence (PNG, JPG, MP4, MOV) when filling out the form.
-            </p>
-        </details>
-
-        <details class="group bg-white rounded-xl shadow-md border border-slate-100 p-5">
-            <summary class="flex items-center justify-between cursor-pointer text-blue-950 font-semibold list-none">
-                Who can use SafeReport?
-                <span class="text-blue-900 transition group-open:rotate-180">&#9662;</span>
-            </summary>
-            <p class="text-slate-500 text-sm mt-3 leading-relaxed">
-                Students, teachers, and staff of CCDI can use it to report any incident or threat within the school.
-            </p>
-        </details>
-    </div>
-
-    <div class="text-center mt-12 max-w-2xl mx-auto">
-        <p class="text-slate-600 leading-relaxed">
-            <span class="font-semibold text-blue-900">SafeReport</span> is a web-based system by the
-            <span class="font-semibold">Computer Communication Development Institute (CCDI)</span>, designed to give
-            students a safe and confidential way to report any incident or threat within the
-            school — without fear of their identity being revealed.
-        </p>
+<!-- Call to action -->
+<section class="px-6 py-20 reveal">
+    <div class="max-w-4xl mx-auto rounded-3xl bg-gradient-to-b from-blue-950 to-blue-800 px-8 py-12 text-center text-white shadow-xl shadow-blue-950/20">
+        <h3 class="text-2xl md:text-3xl font-extrabold">See something? Say something.</h3>
+        <p class="mt-2 text-blue-100">Your voice helps keep our school safe.</p>
+        <a href="{{ route('report.create') }}" class="mt-7 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-red-600 to-red-700 px-7 py-3.5 font-bold text-white shadow-lg shadow-red-900/40 transition hover:from-red-700 hover:to-red-800 hover:-translate-y-0.5">
+            Submit a Report
+        </a>
     </div>
 </section>
 
@@ -273,6 +304,32 @@
         <p>Capstone Project | BS Information Technology</p>
     </div>
 </footer>
+
+<script>
+// How-it-works tabs
+const tabs = document.querySelectorAll('.step-tab');
+const panels = document.querySelectorAll('.step-panel');
+const bar = document.getElementById('step-bar');
+tabs.forEach(tab => tab.addEventListener('click', () => {
+    const i = Number(tab.dataset.step);
+    tabs.forEach((t, n) => {
+        const on = n === i;
+        t.setAttribute('aria-selected', on);
+        t.classList.toggle('border-red-600', on);
+        t.classList.toggle('text-blue-950', on);
+        t.classList.toggle('border-transparent', !on);
+        t.classList.toggle('text-slate-500', !on);
+    });
+    panels.forEach((p, n) => p.classList.toggle('active', n === i));
+    bar.style.width = ((i + 1) / tabs.length * 100) + '%';
+}));
+
+// Section reveal on scroll
+const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>

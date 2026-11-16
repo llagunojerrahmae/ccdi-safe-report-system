@@ -19,13 +19,13 @@ class Report extends Model
         'evidence_paths',
         'status',
         'priority',
-        'reporter_type',
     ];
-
+    
     protected $casts = [
         'evidence_paths' => 'array',
     ];
 
+    // Default values para sa mga bagong record
     protected $attributes = [
         'status' => 'pending',
     ];
@@ -44,6 +44,9 @@ class Report extends Model
 }
     }
 
+    /**
+     *Generates a unique Tracking Code (e.g. SR-A1B2C3D4)
+     */
     public static function generateTrackingCode(): string
     {
         do {
@@ -52,4 +55,10 @@ class Report extends Model
 
         return $code;
     }
+
+    public function notes()
+{
+    return $this->hasMany(\App\Models\ReportNote::class)->latest();
 }
+}
+

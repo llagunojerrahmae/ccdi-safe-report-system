@@ -92,22 +92,14 @@
 <!-- Main -->
 <main class="flex-1 min-w-0 p-6 lg:p-10">
 
-    <!-- Back + title -->
-    <a href="{{ route('admin.dashboard') }}"
-       class="inline-flex items-center gap-2 text-sm font-semibold text-blue-900 bg-white border border-slate-200 hover:bg-blue-950 hover:text-white hover:border-blue-950 px-4 py-2 rounded-full shadow-sm transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-        Back to Dashboard
-    </a>
+    <!-- Top bar -->
+    <div class="flex flex-wrap items-center justify-between gap-3">
+        <a href="{{ route('admin.dashboard') }}"
+           class="inline-flex items-center gap-2 text-sm font-semibold text-blue-900 bg-white border border-slate-200 hover:bg-blue-950 hover:text-white hover:border-blue-950 px-4 py-2 rounded-full shadow-sm transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+            Back to Dashboard
+        </a>
 
-    <div class="mt-6 mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-        <div>
-            <h2 class="text-3xl font-extrabold text-blue-950">Report Details<span class="text-red-600">.</span></h2>
-            <div class="w-12 h-1 bg-red-600 rounded-full mt-2"></div>
-            <p class="text-slate-500 text-sm mt-3">
-                Tracking Code:
-                <span class="font-mono font-bold text-blue-900 bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-md">{{ $report->tracking_code }}</span>
-            </p>
-        </div>
         <div class="flex flex-wrap items-center gap-2">
             <span class="inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full uppercase ring-1 ring-inset {{ $sc[0] }}">
                 <span class="w-1.5 h-1.5 rounded-full {{ $sc[1] }}"></span>{{ $report->status }}
@@ -118,52 +110,105 @@
         </div>
     </div>
 
+    <!-- Hero -->
+    <section class="mt-6 relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white shadow-lg">
+        <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-red-600/20 blur-2xl"></div>
+        <div class="absolute -left-10 -bottom-20 w-56 h-56 rounded-full bg-blue-400/10 blur-2xl"></div>
+
+        <div class="relative p-7 lg:p-9">
+            <p class="text-[11px] uppercase tracking-widest text-blue-300 font-semibold">Incident Report</p>
+            <div class="mt-2 flex flex-wrap items-center gap-3">
+                <h2 class="text-3xl font-extrabold tracking-tight">{{ $report->incident_label }}<span class="text-red-500">.</span></h2>
+                <button type="button" id="copy-code" title="Copy tracking code"
+                        class="inline-flex items-center gap-2 font-mono text-sm font-bold bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1.5 rounded-lg transition">
+                    {{ $report->tracking_code }}
+                    <svg class="w-4 h-4 text-blue-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg>
+                </button>
+            </div>
+
+            @php $heroNew = $report->notes->whereNull('seen_by_admin_at')->count(); @endphp
+            @if ($heroNew > 0)
+                <a href="#faculty-notes" class="mt-5 inline-flex items-center gap-2.5 rounded-full bg-red-600 hover:bg-red-500 px-4 py-2 text-sm font-bold shadow-lg shadow-red-900/30 transition">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+                        <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-white"></span>
+                    </span>
+                    {{ $heroNew }} new {{ \Illuminate\Support\Str::plural('note', $heroNew) }} from faculty
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"/></svg>
+                </a>
+            @endif
+
+            <div class="mt-7 grid sm:grid-cols-3 gap-4">
+                <div class="flex items-center gap-3 rounded-2xl bg-white/10 border border-white/10 px-4 py-3.5">
+                    <span class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-red-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+                    </span>
+                    <div class="min-w-0">
+                        <p class="text-[10px] uppercase tracking-wider text-blue-300 font-semibold">Incident Type</p>
+                        <p class="font-bold truncate">{{ $report->incident_label }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 rounded-2xl bg-white/10 border border-white/10 px-4 py-3.5">
+                    <span class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-red-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                    </span>
+                    <div class="min-w-0">
+                        <p class="text-[10px] uppercase tracking-wider text-blue-300 font-semibold">Location</p>
+                        <p class="font-bold truncate">{{ $report->location }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 rounded-2xl bg-white/10 border border-white/10 px-4 py-3.5">
+                    <span class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-red-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </span>
+                    <div class="min-w-0">
+                        <p class="text-[10px] uppercase tracking-wider text-blue-300 font-semibold">Submitted</p>
+                        <p class="font-bold">{{ $report->created_at->format('M d, Y') }}
+                            <span class="font-normal text-blue-200 text-xs">· {{ $report->created_at->format('h:i A') }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     @if(session('success'))
-        <div class="mb-6 flex items-center gap-3 p-4 text-sm text-green-800 bg-green-50 border border-green-200 border-l-4 border-l-green-600 rounded-xl">
+        <div class="mt-6 flex items-center gap-3 p-4 text-sm text-green-800 bg-green-50 border border-green-200 border-l-4 border-l-green-600 rounded-xl">
             <svg class="w-5 h-5 shrink-0 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             {{ session('success') }}
         </div>
     @endif
 
     @if($errors->any())
-        <div class="mb-6 flex items-center gap-3 p-4 text-sm text-red-800 bg-red-50 border border-red-200 border-l-4 border-l-red-600 rounded-xl">
+        <div class="mt-6 flex items-center gap-3 p-4 text-sm text-red-800 bg-red-50 border border-red-200 border-l-4 border-l-red-600 rounded-xl">
             <svg class="w-5 h-5 shrink-0 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
             {{ $errors->first() }}
         </div>
     @endif
 
-    <div class="grid xl:grid-cols-3 gap-6 items-start">
+    <div class="mt-6 grid xl:grid-cols-3 gap-6 items-start">
 
-        <!-- Left: details -->
+        <!-- Left -->
         <div class="xl:col-span-2 space-y-6">
 
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 border-t-4 border-t-blue-950 p-7">
-                <div class="grid sm:grid-cols-3 gap-6">
-                    <div>
-                        <p class="text-xs uppercase text-slate-400 font-semibold tracking-wide mb-1.5">Incident Type</p>
-                        <p class="font-bold text-blue-950">{{ $report->incident_label }}</p>
-                    </div>
-                    <div>
-                        <p class="text-xs uppercase text-slate-400 font-semibold tracking-wide mb-1.5">Location</p>
-                        <p class="font-bold text-blue-950">{{ $report->location }}</p>
-                    </div>
-                    <div>
-                        <p class="text-xs uppercase text-slate-400 font-semibold tracking-wide mb-1.5">Submitted</p>
-                        <p class="font-bold text-blue-950">{{ $report->created_at->format('M d, Y') }}</p>
-                        <p class="text-xs text-slate-400">{{ $report->created_at->format('h:i A') }}</p>
-                    </div>
+            <!-- Description -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-7">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="w-1.5 h-5 rounded-full bg-red-600"></span>
+                    <h3 class="text-blue-950 font-extrabold text-lg">What happened</h3>
                 </div>
-
-                <div class="mt-7 pt-6 border-t border-slate-100">
-                    <p class="text-xs uppercase text-slate-400 font-semibold tracking-wide mb-2">Description</p>
-                    <p class="bg-slate-50 border border-slate-100 border-l-4 border-l-red-600 rounded-xl p-5 text-slate-700 text-sm leading-relaxed whitespace-pre-line">{{ $report->description }}</p>
-                </div>
+                <p class="text-slate-700 leading-relaxed whitespace-pre-line">{{ $report->description }}</p>
             </div>
 
             <!-- Evidence -->
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-7">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-blue-950 font-extrabold text-lg">Evidence Attached</h3>
+                <div class="flex items-center justify-between mb-5">
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-5 rounded-full bg-red-600"></span>
+                        <h3 class="text-blue-950 font-extrabold text-lg">Evidence</h3>
+                    </div>
                     @if($evidence->isNotEmpty())
                         <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-100 text-blue-800">{{ $evidence->count() }} file{{ $evidence->count() > 1 ? 's' : '' }}</span>
                     @endif
@@ -205,45 +250,55 @@
                     </div>
                 @endif
             </div>
+
         </div>
 
         <!-- Right: manage -->
-        <div class="space-y-6">
+        <div class="space-y-6 xl:sticky xl:top-6">
 
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-7">
-                <h3 class="text-blue-950 font-extrabold text-lg mb-5">Manage Report</h3>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="px-7 py-5 bg-slate-50 border-b border-slate-100">
+                    <h3 class="text-blue-950 font-extrabold text-lg">Manage Report</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Update the status and risk level.</p>
+                </div>
 
-                {{-- Update Status --}}
-                <form action="{{ route('admin.reports.update', $report) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <label class="block text-xs uppercase text-slate-400 font-semibold tracking-wide mb-2">Status</label>
-                    <div class="flex gap-2">
-                        <select name="status" class="min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm outline-none transition focus:border-blue-700 focus:bg-white focus:ring-4 focus:ring-blue-700/15">
-                            <option value="pending" {{ $report->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                            <option value="reviewing" {{ $report->status == 'reviewing' ? 'selected' : '' }}>Reviewing</option>
-                            <option value="resolved" {{ $report->status == 'resolved' ? 'selected' : '' }}>Resolved</option>
-                            <option value="dismissed" {{ $report->status == 'dismissed' ? 'selected' : '' }}>Dismissed</option>
-                        </select>
-                        <button type="submit" class="bg-blue-950 hover:bg-blue-900 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition">Update</button>
-                    </div>
-                </form>
+                <div class="p-7 space-y-7">
+                    {{-- Status --}}
+                    <form action="{{ route('admin.reports.update', $report) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <p class="text-xs uppercase text-slate-400 font-semibold tracking-wide mb-3">Status</p>
+                        <div class="grid grid-cols-2 gap-2">
+                            @foreach (['pending' => 'Pending', 'reviewing' => 'Reviewing', 'resolved' => 'Resolved', 'dismissed' => 'Dismissed'] as $val => $label)
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="status" value="{{ $val }}" class="peer sr-only" {{ $report->status === $val ? 'checked' : '' }}>
+                                    <span class="block text-center rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-bold text-slate-600 transition hover:border-blue-700 hover:text-blue-900 peer-checked:border-blue-950 peer-checked:bg-blue-950 peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-blue-700/20">{{ $label }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                        <button type="submit" class="mt-3 w-full bg-blue-950 hover:bg-blue-900 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition">Update Status</button>
+                    </form>
 
-                {{-- Set Priority --}}
-                <form action="{{ route('admin.reports.priority', $report) }}" method="POST" class="mt-6 pt-6 border-t border-slate-100">
-                    @csrf
-                    @method('PATCH')
-                    <label class="block text-xs uppercase text-slate-400 font-semibold tracking-wide mb-2">Priority</label>
-                    <div class="flex gap-2">
-                        <select name="priority" required class="min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm outline-none transition focus:border-blue-700 focus:bg-white focus:ring-4 focus:ring-blue-700/15">
-                            <option value="" disabled {{ !$report->priority ? 'selected' : '' }}>Set Priority</option>
-                            <option value="high" {{ $report->priority == 'high' ? 'selected' : '' }}>High Risk</option>
-                            <option value="moderate" {{ $report->priority == 'moderate' ? 'selected' : '' }}>Moderate Risk</option>
-                            <option value="low" {{ $report->priority == 'low' ? 'selected' : '' }}>Low Risk</option>
-                        </select>
-                        <button type="submit" class="bg-blue-950 hover:bg-blue-900 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition">Save</button>
-                    </div>
-                </form>
+                    {{-- Priority --}}
+                    <form action="{{ route('admin.reports.priority', $report) }}" method="POST" class="pt-7 border-t border-slate-100">
+                        @csrf
+                        @method('PATCH')
+                        <p class="text-xs uppercase text-slate-400 font-semibold tracking-wide mb-3">Priority</p>
+                        <div class="grid grid-cols-3 gap-2">
+                            @foreach ([
+                                'high'     => ['High', 'peer-checked:bg-red-600 peer-checked:border-red-600'],
+                                'moderate' => ['Moderate', 'peer-checked:bg-orange-500 peer-checked:border-orange-500'],
+                                'low'      => ['Low', 'peer-checked:bg-green-600 peer-checked:border-green-600'],
+                            ] as $val => [$label, $checked])
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="priority" value="{{ $val }}" required class="peer sr-only" {{ $report->priority === $val ? 'checked' : '' }}>
+                                    <span class="block text-center rounded-xl border border-slate-200 bg-slate-50 px-2 py-2.5 text-xs font-bold text-slate-600 transition hover:border-blue-700 peer-checked:text-white {{ $checked }}">{{ $label }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                        <button type="submit" class="mt-3 w-full bg-blue-950 hover:bg-blue-900 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition">Save Priority</button>
+                    </form>
+                </div>
             </div>
 
             {{-- Move to Archive (lalabas lang kapag Resolved o Dismissed) --}}
@@ -263,6 +318,8 @@
             @endif
         </div>
     </div>
+    {{-- Faculty notes --}}
+    @include('partials.faculty-notes')
 </main>
 
 <!-- Evidence viewer -->
@@ -292,6 +349,7 @@
         </button>
     </div>
 </div>
+
 
 <script>
     const items = Array.from(document.querySelectorAll('[data-evidence]'));
@@ -346,6 +404,17 @@
         if (e.key === 'Escape') closeViewer();
         if (e.key === 'ArrowLeft' && items.length > 1) show(index - 1);
         if (e.key === 'ArrowRight' && items.length > 1) show(index + 1);
+    });
+
+    // Copy tracking code
+    const copyBtn = document.getElementById('copy-code');
+    copyBtn.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(@json($report->tracking_code));
+            const old = copyBtn.firstChild.textContent;
+            copyBtn.firstChild.textContent = 'Copied! ';
+            setTimeout(() => copyBtn.firstChild.textContent = old, 1200);
+        } catch (e) {}
     });
 </script>
 

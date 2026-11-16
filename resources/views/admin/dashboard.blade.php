@@ -98,6 +98,13 @@
         </div>
     @endif
 
+    @if(($stats['new_notes'] ?? 0) > 0)
+        <div class="mb-6 flex items-center gap-3 p-4 text-sm text-blue-900 bg-blue-50 border border-blue-200 border-l-4 border-l-blue-700 rounded-xl">
+            <span class="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ $stats['new_notes'] }}</span>
+            New faculty {{ \Illuminate\Support\Str::plural('note', $stats['new_notes']) }} you haven't read yet.
+        </div>
+    @endif
+
     <!-- Stat cards -->
     <div class="grid grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
 
@@ -199,6 +206,7 @@
                         <th class="text-left px-6 py-4 font-semibold">Date</th>
                         <th class="text-left px-6 py-4 font-semibold">Status</th>
                         <th class="text-left px-6 py-4 font-semibold">Priority</th>
+                        <th class="text-left px-6 py-4 font-semibold">Notes</th>
                         <th class="text-right px-6 py-4 font-semibold">Action</th>
                     </tr>
                 </thead>
@@ -241,6 +249,9 @@
                                     {{ $priorityLabels[$report->priority] ?? 'Not set' }}
                                 </span>
                             </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @include('partials.notes-badge')
+                            </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('admin.reports.show', $report) }}"
                                    class="inline-flex items-center gap-1 text-xs font-bold text-blue-900 bg-blue-50 hover:bg-blue-950 hover:text-white px-3.5 py-1.5 rounded-lg transition">
@@ -251,7 +262,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-14 text-center">
+                            <td colspan="8" class="px-6 py-14 text-center">
                                 <div class="w-12 h-12 mx-auto rounded-full bg-slate-100 flex items-center justify-center">
                                     <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z"/></svg>
                                 </div>
@@ -260,7 +271,7 @@
                         </tr>
                     @endforelse
                     <tr id="no-match" class="hidden">
-                        <td colspan="7" class="px-6 py-10 text-center text-slate-400">No matching reports on this page.</td>
+                        <td colspan="8" class="px-6 py-10 text-center text-slate-400">No matching reports on this page.</td>
                     </tr>
                 </tbody>
             </table>

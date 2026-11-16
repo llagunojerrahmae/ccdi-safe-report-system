@@ -15,7 +15,7 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-        // 1. Loose validation para hindi humarang sa submission
+        // 1. Loose validation
         $validated = $request->validate([
             'incident_type' => 'required',
             'location'      => 'required|string',

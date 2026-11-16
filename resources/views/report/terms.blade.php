@@ -8,6 +8,66 @@
 </head>
 <body class="bg-slate-50 font-sans antialiased">
 
+@php
+    $contactLink = '<a href="' . route('contact') . '" class="text-blue-700 font-semibold underline hover:text-blue-900">Contact page</a>';
+
+    $studentTerms = [
+        ['title' => 'Acceptance of Terms',
+         'body' => 'By using SafeReport, you agree to these Terms and Conditions. If you do not agree, please do not submit a report through this system.'],
+        ['title' => 'Purpose of the System',
+         'body' => 'SafeReport is a web-based system of the Computer Communication Development Institute (CCDI) that allows CCDI students to report incidents, threats, and safety concerns within the school safely and confidentially.'],
+        ['title' => 'Anonymity and Confidentiality',
+         'body' => 'SafeReport does not require your name or personal details to submit a report. Reports are accessible only to authorized school personnel and will be used only to investigate and respond to the concern. Please do not include personal information that could identify you unless you choose to.'],
+        ['title' => 'Responsible Use',
+         'body' => 'You agree to submit only truthful and good-faith reports. The following are prohibited:',
+         'list' => [
+             'False, malicious, or prank reports',
+             'Harassment, defamation, or targeting of individuals without basis',
+             'Spam, repeated submissions, or attempts to disrupt or hack the system',
+             'Uploading harmful files or inappropriate content',
+         ]],
+        ['title' => 'Report Handling',
+         'body' => 'Submitted reports are reviewed by authorized CCDI personnel. SafeReport does not replace the existing disciplinary processes of CCDI, and any investigation or action remains with authorized personnel. Submission does not guarantee a specific outcome or response time. Each report receives a tracking code that you may use in the "Track Report" page to check its status. Keep this code safe, as it cannot be recovered if lost.'],
+        ['title' => 'Emergencies', 'highlight' => true,
+         'body' => 'SafeReport is not an emergency hotline. If someone is in immediate danger, contact school security or local authorities right away.'],
+        ['title' => 'Data Collected and Stored',
+         'body' => 'The system stores only the information needed to process the report: incident type, description, date/time of submission, and any attachments you provide. Data is kept secure and is not shared with third parties, except when required by law or school policy.'],
+        ['title' => 'Misuse and Consequences',
+         'body' => 'Reports found to be intentionally false or abusive may be subject to disciplinary action in accordance with CCDI policies.'],
+        ['title' => 'Changes to These Terms',
+         'body' => 'CCDI may update these Terms at any time. Continued use of the system means you accept the updated Terms.'],
+        ['title' => 'Contact',
+         'body' => 'For questions about these Terms, please visit the ' . $contactLink . ' or reach authorized CCDI personnel.'],
+    ];
+
+    $facultyTerms = [
+        ['title' => 'Authorized Access',
+         'body' => 'The Faculty Login is intended only for authorized CCDI faculty and personnel. Your account is personal: do not share your credentials, and always log out when using a shared or public device. Any activity under your account is your responsibility.'],
+        ['title' => 'Confidentiality of Reports',
+         'body' => 'All reports and attachments viewed through SafeReport are confidential. Do not disclose their contents to unauthorized persons, and share information only on a need-to-know basis in accordance with CCDI policies.'],
+        ['title' => 'Protecting the Reporter',
+         'body' => 'Reports may be anonymous. You must not attempt to identify, trace, or pressure a reporter, and you must not retaliate against anyone for submitting a good-faith report.'],
+        ['title' => 'Responsible Handling of Reports',
+         'body' => 'When handling a report, you agree to:',
+         'list' => [
+             'Review reports promptly, fairly, and without prejudging anyone involved',
+             'Keep the report status and remarks accurate and up to date',
+             'Act only within your authorized role and CCDI disciplinary procedures',
+             'Record actions taken so that they can be reviewed if needed',
+         ]],
+        ['title' => 'Urgent and Emergency Concerns', 'highlight' => true,
+         'body' => 'If a report indicates immediate danger, do not wait for normal processing. Escalate right away to school security, the guidance office, or local authorities. SafeReport is not an emergency hotline.'],
+        ['title' => 'Data Use and Protection',
+         'body' => 'Access report data only for the purpose of handling the concern. Do not copy, download, forward, or post reports or attachments outside the system or outside authorized channels. Handle all data in line with the Data Privacy Act of 2012 (RA 10173) and CCDI policy.'],
+        ['title' => 'Misuse and Consequences',
+         'body' => 'Unauthorized access, disclosure, tampering with reports, or retaliation against a reporter may result in disciplinary action under CCDI policies and may carry liability under applicable laws.'],
+        ['title' => 'Changes and Contact',
+         'body' => 'CCDI may update these Terms at any time. Continued use of the Faculty Login means you accept the updated Terms. For questions, visit the ' . $contactLink . ' or reach the system administrator.'],
+    ];
+
+    $groups = ['students' => $studentTerms, 'faculty' => $facultyTerms];
+@endphp
+
 <!-- Navbar -->
 <nav class="bg-gradient-to-r from-blue-950 to-blue-900 shadow-lg sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
@@ -45,105 +105,54 @@
 <div class="max-w-3xl mx-auto px-6 pt-14 pb-20">
 
     <!-- Title -->
-    <div class="text-center mb-10">
+    <div class="text-center mb-8">
         <h2 class="text-blue-950 font-extrabold text-3xl md:text-4xl tracking-wide mt-5">TERMS AND CONDITIONS<span class="text-red-600">.</span></h2>
         <div class="w-14 h-1 bg-red-600 rounded-full mx-auto mt-3"></div>
-        <p class="text-slate-500 text-sm mt-3">Last updated: October 18, 2026</p>
+        <p class="text-slate-500 text-sm mt-3">Last updated: November 16, 2026</p>
     </div>
 
-    <!-- Terms -->
-    <div class="bg-white rounded-2xl shadow-lg shadow-blue-950/5 border border-slate-200 border-t-4 border-t-blue-950 overflow-hidden">
-        <div class="divide-y divide-slate-100 text-slate-600 text-sm leading-relaxed">
-            <div class="flex gap-4 p-6 md:p-7">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-blue-950 text-white text-sm font-bold flex items-center justify-center">1</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Acceptance of Terms</h3>
-                    <p>By using SafeReport, you agree to these Terms and Conditions. If you do not agree, please do not submit a report through this system.</p>
+    <!-- Tabs -->
+    <div class="flex justify-center mb-6">
+        <div role="tablist" class="inline-flex bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
+            <button type="button" role="tab" id="tab-students" data-tab="students" aria-selected="true"
+                    class="terms-tab px-6 py-2 rounded-lg text-sm font-semibold transition">
+                For Students
+            </button>
+            <button type="button" role="tab" id="tab-faculty" data-tab="faculty" aria-selected="false"
+                    class="terms-tab px-6 py-2 rounded-lg text-sm font-semibold transition">
+                For Faculty
+            </button>
+        </div>
+    </div>
+
+    <!-- Terms panels -->
+    @foreach ($groups as $key => $terms)
+    <div id="panel-{{ $key }}" role="tabpanel" aria-labelledby="tab-{{ $key }}" class="terms-panel {{ $key === 'students' ? '' : 'hidden' }}">
+        <div class="bg-white rounded-2xl shadow-lg shadow-blue-950/5 border border-slate-200 border-t-4 border-t-blue-950 overflow-hidden">
+            <div class="divide-y divide-slate-100 text-slate-600 text-sm leading-relaxed">
+                @foreach ($terms as $term)
+                <div class="flex gap-4 p-6 md:p-7 {{ !empty($term['highlight']) ? 'bg-red-50/70' : '' }}">
+                    <span class="w-9 h-9 shrink-0 rounded-full {{ $loop->iteration % 2 === 1 ? 'bg-blue-950' : 'bg-red-600' }} text-white text-sm font-bold flex items-center justify-center">{{ $loop->iteration }}</span>
+                    <div class="min-w-0">
+                        <h3 class="text-blue-950 font-bold text-base mb-1">{{ $term['title'] }}</h3>
+                        <p>{!! $term['body'] !!}</p>
+                        @if (!empty($term['list']))
+                        <ul class="mt-3 space-y-2">
+                            @foreach ($term['list'] as $item)
+                            <li class="flex gap-3">
+                                <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-red-600"></span>
+                                <span>{{ $item }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                        @endif
+                    </div>
                 </div>
-            </div>
-            <div class="flex gap-4 p-6 md:p-7">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-red-600 text-white text-sm font-bold flex items-center justify-center">2</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Purpose of the System</h3>
-                    <p>SafeReport is a web-based system of the Computer Communication Development Institute (CCDI) that allows CCDI students to report incidents, threats, and safety concerns within the school safely and confidentially.</p>
-                </div>
-            </div>
-            <div class="flex gap-4 p-6 md:p-7">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-blue-950 text-white text-sm font-bold flex items-center justify-center">3</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Anonymity and Confidentiality</h3>
-                    <p>SafeReport does not require your name or personal details to submit a report. Reports are accessible only to authorized school personnel and will be used only to investigate and respond to the concern. Please do not include personal information that could identify you unless you choose to.</p>
-                </div>
-            </div>
-            <div class="flex gap-4 p-6 md:p-7">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-red-600 text-white text-sm font-bold flex items-center justify-center">4</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Responsible Use</h3>
-                    <p>You agree to submit only truthful and good-faith reports. The following are prohibited:</p>
-                    <ul class="mt-3 space-y-2">
-                        <li class="flex gap-3">
-                            <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-red-600"></span>
-                            <span>False, malicious, or prank reports</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-red-600"></span>
-                            <span>Harassment, defamation, or targeting of individuals without basis</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-red-600"></span>
-                            <span>Spam, repeated submissions, or attempts to disrupt or hack the system</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-red-600"></span>
-                            <span>Uploading harmful files or inappropriate content</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="flex gap-4 p-6 md:p-7">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-blue-950 text-white text-sm font-bold flex items-center justify-center">5</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Report Handling</h3>
-                    <p>Submitted reports are reviewed by authorized CCDI personnel. SafeReport does not replace the existing disciplinary processes of CCDI, and any investigation or action remains with authorized personnel. Submission does not guarantee a specific outcome or response time. Each report receives a tracking code that you may use in the "Track Report" page to check its status. Keep this code safe, as it cannot be recovered if lost.</p>
-                </div>
-            </div>
-            <div class="flex gap-4 p-6 md:p-7 bg-red-50/70">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-red-600 text-white text-sm font-bold flex items-center justify-center">6</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Emergencies</h3>
-                    <p>SafeReport is not an emergency hotline. If someone is in immediate danger, contact school security or local authorities right away.</p>
-                </div>
-            </div>
-            <div class="flex gap-4 p-6 md:p-7">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-blue-950 text-white text-sm font-bold flex items-center justify-center">7</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Data Collected and Stored</h3>
-                    <p>The system stores only the information needed to process the report: incident type, description, date/time of submission, and any attachments you provide. Data is kept secure and is not shared with third parties, except when required by law or school policy.</p>
-                </div>
-            </div>
-            <div class="flex gap-4 p-6 md:p-7">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-red-600 text-white text-sm font-bold flex items-center justify-center">8</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Misuse and Consequences</h3>
-                    <p>Reports found to be intentionally false or abusive may be subject to disciplinary action in accordance with CCDI policies.</p>
-                </div>
-            </div>
-            <div class="flex gap-4 p-6 md:p-7">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-blue-950 text-white text-sm font-bold flex items-center justify-center">9</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Changes to These Terms</h3>
-                    <p>CCDI may update these Terms at any time. Continued use of the system means you accept the updated Terms.</p>
-                </div>
-            </div>
-            <div class="flex gap-4 p-6 md:p-7">
-                <span class="w-9 h-9 shrink-0 rounded-full bg-red-600 text-white text-sm font-bold flex items-center justify-center">10</span>
-                <div class="min-w-0">
-                    <h3 class="text-blue-950 font-bold text-base mb-1">Contact</h3>
-                    <p>For questions about these Terms, please visit the <a href="{{ route('contact') }}" class="text-blue-700 font-semibold underline hover:text-blue-900">Contact page</a> or reach authorized CCDI personnel.</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
+    @endforeach
 
     <!-- Back -->
     <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -225,6 +234,36 @@
         <p>Capstone Project | BS Information Technology</p>
     </div>
 </footer>
+
+<script>
+    (function () {
+        var tabs = document.querySelectorAll('.terms-tab');
+        var panels = document.querySelectorAll('.terms-panel');
+        var active = ['bg-blue-950', 'text-white', 'shadow'];
+        var inactive = ['text-slate-600', 'hover:bg-slate-100'];
+
+        function show(name) {
+            tabs.forEach(function (t) {
+                var on = t.dataset.tab === name;
+                t.setAttribute('aria-selected', on ? 'true' : 'false');
+                active.forEach(function (c) { t.classList.toggle(c, on); });
+                inactive.forEach(function (c) { t.classList.toggle(c, !on); });
+            });
+            panels.forEach(function (p) {
+                p.classList.toggle('hidden', p.id !== 'panel-' + name);
+            });
+            try { history.replaceState(null, '', '#' + name); } catch (e) {}
+        }
+
+        tabs.forEach(function (t) {
+            t.addEventListener('click', function () { show(t.dataset.tab); });
+        });
+
+        // Open the right tab from the URL, e.g. /terms#faculty
+        var hash = location.hash.replace('#', '');
+        show(hash === 'faculty' ? 'faculty' : 'students');
+    })();
+</script>
 
 </body>
 </html>

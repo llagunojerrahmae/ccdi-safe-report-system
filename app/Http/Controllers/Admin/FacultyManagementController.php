@@ -38,7 +38,6 @@ class FacultyManagementController extends Controller
         return back()->with('success', $user->name . ' has been rejected.');
     }
 
-    // Faculty accounts lang ang puwedeng galawin dito, hindi ang admin
     private function ensureFaculty(User $user): void
     {
         abort_unless($user->role === 'faculty', 404);

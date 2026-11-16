@@ -8,7 +8,6 @@
 
     <main class="w-full max-w-4xl grid md:grid-cols-[1.1fr_1fr] bg-white rounded-[28px] shadow-2xl shadow-[#14204a]/20 overflow-hidden">
 
-        {{-- Left panel: same navy hero style as the landing page --}}
         <section class="flex flex-col justify-between gap-10 p-8 md:p-12 text-white bg-gradient-to-b from-[#14204a] via-[#26408b] to-[#14204a]">
             <div class="flex items-center gap-3">
                 <img src="{{ asset('logo/logo.jpg') }}" alt="CCDI logo"

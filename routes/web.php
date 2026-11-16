@@ -90,3 +90,7 @@ Route::post('/faculty/logout', [FacultyAuthController::class, 'logout'])->name('
 Route::get('/faculty/dashboard', [FacultyDashboardController::class, 'index'])
     ->middleware(EnsureRole::class . ':faculty')
     ->name('faculty.dashboard');
+
+Route::post('/faculty/reports/{report}/notes', [\App\Http\Controllers\FacultyReportNoteController::class, 'store'])
+    ->middleware(EnsureRole::class . ':faculty')
+    ->name('faculty.reports.notes.store');

@@ -28,7 +28,6 @@ class FacultyAuthController extends Controller
         $email = strtolower(trim($credentials['email']));
         $user  = User::where('email', $email)->first();
 
-        // Iisang mensahe para hindi malaman kung existing ang email o kung admin ito
         if (! $user || ! Hash::check($credentials['password'], $user->password) || $user->role !== 'faculty') {
             return back()->withErrors(['email' => 'Invalid credentials.'])->onlyInput('email');
         }
@@ -56,7 +55,6 @@ class FacultyAuthController extends Controller
 
     public function register(Request $request)
     {
-        // I-lowercase muna ang email bago i-validate para iwas duplicate
         $request->merge(['email' => strtolower(trim((string) $request->input('email')))]);
 
         $data = $request->validate([
@@ -69,7 +67,6 @@ class FacultyAuthController extends Controller
             'email.ends_with' => 'Please use your CCDI school email (example: name@ccdi.edu.ph).',
         ]);
 
-        // Dapat nasa opisyal na listahan ng faculty ang ID at email
         $listed = FacultyRoster::where('faculty_id', $data['faculty_id'])
             ->where('email', $data['email'])
             ->exists();
@@ -85,7 +82,7 @@ class FacultyAuthController extends Controller
             'email'      => $data['email'],
             'faculty_id' => $data['faculty_id'],
             'department' => $data['department'],
-            'password'   => $data['password'], // na-hash na ng model
+            'password'   => $data['password'], 
             'role'       => 'faculty',
             'status'     => 'pending',
         ]);
