@@ -58,10 +58,10 @@
    php artisan key:generate
    ```
 4. Start Apache and MySQL in XAMPP.
-   ```
+  
 5. Open phpMyAdmin (`http://localhost/phpmyadmin`), create a database named `ccdi_safe_report`, then import `database/ccdi_safe_report_db.sql`.
    - Alternatively, run: `php artisan migrate --seed`
-   ```
+
 6. In two separate terminals, run:
    ```
    php artisan serve
