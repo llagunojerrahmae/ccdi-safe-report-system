@@ -12,8 +12,8 @@
 - **JAMAICA JOY MALANA**
 - **IVAN MANRIQUE**
 
-**Course/Section:** BSIT Block 3-B
-**Instructor:** Jay Millena
+**Course/Section:** BSIT Block 3-B  
+**Instructor:** Jay Millena  
 **School Year:** 2026-2027
 
 ## Features
@@ -22,7 +22,8 @@
 - **Fast Reporting**: Select the incident type, fill in the details, and submit the report right away.
 - **Track Report**: Reporters receive a tracking code they can use to check the status of their report.
 - **Direct Action**: Every submitted report goes directly to the administration for prompt response.
-- **Faculty Interface**: Verified faculty members can log in to view submitted reports.
+- **Faculty Request Approval by Authorized Personnel**: Administrators can review, verify, approve, reject, or revoke faculty account requests to ensure that only authorized CCDI personnel gain access to internal incident reports.
+- **Faculty Interface**: Verified faculty members can log in to view reports, update incident statuses (e.g., *Reviewing*, *I will handle this*, *Resolved*), and send direct investigation notes to the admin.
 - **Admin Dashboard**: Admins can log in to view, prioritize, update, and manage submitted reports.
 
 ## Technologies Used
@@ -42,26 +43,6 @@
 ## Installation and Setup
 
 1. Clone the repository:
-   ```
+   ```bash
    git clone [repo-link]
    cd ccdi-safe-report
-   ```
-2. Install dependencies:
-   ```
-   composer install
-   npm install
-   ```
-3. Copy the environment file and generate the app key:
-   ```
-   copy .env.example .env
-   php artisan key:generate
-   ```
-4. Start Apache and MySQL in XAMPP.
-5. Open phpMyAdmin (`http://localhost/phpmyadmin`), create a database named `ccdi_safe_report`, then import `database/ccdi_safe_report_db.sql`.
-   - Alternatively, run: `php artisan migrate --seed`
-6. In two separate terminals, run:
-   ```
-   php artisan serve
-   npm run dev
-   ```
-7. Open `http://127.0.0.1:8000` in your browser.
