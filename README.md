@@ -12,47 +12,6 @@
 - **JAMAICA JOY MALANA**
 - **IVAN MANRIQUE**
 
-**Course/Section:** BSIT Block 3-B
-**Instructor:** Jay Millena
-**School Year:** 2026-2027
-
-## Features
-
-- **100% Anonymous**: No personal information about the reporter is collected or stored.
-- **Fast Reporting**: Select the incident type, fill in the details, and submit the report right away.
-- **Track Report**: Reporters receive a tracking code they can use to check the status of their report.
-- **Direct Action**: Every submitted report goes directly to the administration for prompt response.
-- **Faculty Interface**: Verified faculty members can log in to view submitted reports.
-- **Admin Dashboard**: Admins can log in to view, prioritize, update, and manage submitted reports.
-
-## Technologies Used
-
-- Laravel (PHP)
-- MySQL (via XAMPP)
-- Tailwind CSS
-- Vite
-- Blade Templates
-
-## Requirements
-
-- XAMPP (PHP 8.x and MySQL)
-- Composer
-- Node.js and npm
-
-# SafeReport
-
-**SafeReport** is a web-based anonymous incident reporting system developed for the **Computer Communication Development Institute (CCDI)**. It gives students, teachers, and staff a safe and confidential way to report any incident or threat within the school, without fear of their identity being revealed.
-
-## Developer
-
-- **JERRAH MAE M. LLAGUNO**
-
-## Members
-
-- **SHERN KEITH PASADILLA**
-- **JAMAICA JOY MALANA**
-- **IVAN MANRIQUE**
-
 **Course/Section:** BSIT Block 3-B  
 **Instructor:** Jay Millena  
 **School Year:** 2026-2027
