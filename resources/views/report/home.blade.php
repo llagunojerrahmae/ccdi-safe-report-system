@@ -262,6 +262,7 @@
                 <li><a href="{{ route('report.track') }}" class="hover:text-white transition">Track Report</a></li>
                 <li><a href="{{ route('about') }}" class="hover:text-white transition">About Us</a></li>
                 <li><a href="{{ route('contact') }}" class="hover:text-white transition">Contact</a></li>
+                <li><a href="{{ route('terms') }}" class="hover:text-white transition">Terms</a></li>
             </ul>
         </div>
 

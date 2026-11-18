@@ -74,8 +74,36 @@
             <p class="mt-6 text-center text-sm">
                 <a href="{{ url('/') }}" class="font-semibold text-[#26408b] hover:underline">&larr; Back to SafeReport</a>
             </p>
+
+            {{-- Test account (for evaluation) --}}
+            <div class="mt-6 rounded-xl border border-dashed border-[#26408b]/40 bg-[#26408b]/5 px-4 py-3.5 text-sm">
+                <div class="mb-2 flex items-center justify-between gap-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#26408b]">Test Account (for evaluation)</span>
+                    <button type="button" id="use-test-account"
+                        class="rounded-full border border-[#26408b] px-3 py-1 text-xs font-semibold text-[#26408b] transition hover:bg-[#26408b] hover:text-white">
+                        Use test account
+                    </button>
+                </div>
+                <dl class="space-y-1 text-slate-600">
+                    <div class="flex gap-2">
+                        <dt class="w-20 font-semibold text-[#14204a]">Email:</dt>
+                        <dd id="test-email" class="select-all">test@ccdi.edu.ph</dd>
+                    </div>
+                    <div class="flex gap-2">
+                        <dt class="w-20 font-semibold text-[#14204a]">Password:</dt>
+                        <dd id="test-password" class="select-all">TestAdmin123</dd>
+                    </div>
+                </dl>
+            </div>
         </section>
     </main>
+
+    <script>
+        document.getElementById('use-test-account').addEventListener('click', function () {
+            document.getElementById('email').value = document.getElementById('test-email').textContent.trim();
+            document.getElementById('password').value = document.getElementById('test-password').textContent.trim();
+        });
+    </script>
 
 </body>
 </html>

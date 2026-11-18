@@ -2,7 +2,7 @@
 
 **SafeReport** is a web-based anonymous incident reporting system developed for the **Computer Communication Development Institute (CCDI)**. It gives students, teachers, and staff a safe and confidential way to report any incident or threat within the school, without fear of their identity being revealed.
 
-## Developer
+## Developer (Frontend and Backend)
 
 - **JERRAH MAE M. LLAGUNO**
 

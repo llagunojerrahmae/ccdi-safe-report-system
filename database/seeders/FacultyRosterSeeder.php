@@ -20,6 +20,8 @@ class FacultyRosterSeeder extends Seeder
             ['faculty_id' => 'FAC-0108', 'name' => 'Ynna Daria',           'email' => 'ynna@ccdi.edu.ph'],
             ['faculty_id' => 'FAC-0109', 'name' => 'Louie Aringay',        'email' => 'louie@ccdi.edu.ph'],
             ['faculty_id' => 'FAC-0110', 'name' => 'Joey Bachiller',       'email' => 'joey@ccdi.edu.ph'],
+            // Test account (for evaluation)
+            ['faculty_id' => 'FAC-0111', 'name' => 'Test Faculty',         'email' => 'testfaculty@ccdi.edu.ph'],
         ];
 
         foreach ($faculty as $f) {

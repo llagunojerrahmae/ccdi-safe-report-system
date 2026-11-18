@@ -192,7 +192,7 @@
         @endif
 
         <p class="mt-4 text-center text-sm">
-            <a href="{{ route('report.create') }}" class="font-semibold text-blue-800 hover:underline">&larr; Back to SafeReport</a>
+            <a href="{{ url('/') }}" class="font-semibold text-blue-800 hover:underline">&larr; Back to SafeReport</a>
         </p>
     </main>
 
