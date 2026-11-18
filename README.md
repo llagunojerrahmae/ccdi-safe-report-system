@@ -2,8 +2,7 @@
 
 **SafeReport** is a web-based anonymous incident reporting system developed for the **Computer Communication Development Institute (CCDI)**. It gives students, teachers, and staff a safe and confidential way to report any incident or threat within the school, without fear of their identity being revealed.
 
-## Developer (Frontend and Backend)
-
+## Full-Stack Developer, UI/UX Designer, Tester, and Project Manager
 - **JERRAH MAE M. LLAGUNO**
 
 ## Members
@@ -26,19 +25,12 @@
 - **Faculty Interface**: Verified faculty members can log in to view reports, update incident statuses (e.g., *Reviewing*, *I will handle this*, *Resolved*), and send direct investigation notes to the admin.
 - **Admin Dashboard**: Admins can log in to view, prioritize, update, and manage submitted reports.
 
-## Technologies Used
-
-- Laravel (PHP)
-- MySQL (via XAMPP)
-- Tailwind CSS
-- Vite
-- Blade Templates
-
 ## Requirements
 
-- XAMPP (PHP 8.x and MySQL)
+- PHP 8.2 or higher
 - Composer
 - Node.js and npm
+- MySQL (for example through XAMPP)
 
 ## Installation and Setup
 
@@ -68,3 +60,10 @@
    npm run dev
    ```
 7. Open `http://127.0.0.1:8000` in your browser.
+
+## CREDITS
+-------
+Credits to: PHP server-side scripting language, Laravel as our back-end PHP
+framework, TailwindCSS as our main utility-first CSS framework, Alpine.js for
+managing our components, and Livewire for live synchronous and asynchronous
+access of data.
