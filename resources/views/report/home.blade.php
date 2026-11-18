@@ -26,10 +26,35 @@
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         details[open] .chev { transform: rotate(180deg); }
+
+        /* Navbar hover + active highlight */
+        .nav-link {
+            position: relative;
+            padding: 4px 0;
+            color: #dbeafe; /* blue-100 */
+            transition: color .25s ease;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            height: 2px;
+            width: 0;
+            border-radius: 2px;
+            background: #facc15; /* yellow-400 */
+            transition: width .25s ease;
+        }
+        .nav-link:hover { color: #fff; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: #facc15; font-weight: 700; }
+        .nav-link.active::after { width: 100%; }
+
         @media (prefers-reduced-motion: reduce) {
             .pulse-ring, .step-panel.active { animation: none; }
             .reveal { opacity: 1; transform: none; transition: none; }
             html { scroll-behavior: auto; }
+            .nav-link, .nav-link::after { transition: none; }
         }
     </style>
 </head>
@@ -38,32 +63,44 @@
 <!-- Navbar -->
 <nav class="bg-gradient-to-r from-blue-950 to-blue-900 shadow-lg sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-        <div class="flex items-center gap-3">
+        <a href="{{ route('home') }}" class="flex items-center gap-3">
             <img src="{{ asset('logo/logo.jpg') }}" alt="CCDI Logo" class="w-12 h-12 rounded-full object-cover border-2 border-red-600">
             <div>
                 <h1 class="text-white font-extrabold text-xl tracking-wide leading-tight">SAFEREPORT<span class="text-red-500">.</span></h1>
                 <p class="text-blue-200 text-[11px] tracking-wider uppercase">Computer Communication Development Institute</p>
             </div>
-        </div>
+        </a>
 
-        <div class="hidden md:flex items-center gap-8 text-blue-100 font-medium text-sm">
-            <a href="{{ route('home') }}" class="hover:text-white transition">Home</a>
-            <a href="{{ route('report.track') }}" class="hover:text-white transition text-yellow-400 font-bold">Track Report</a>
-            <a href="{{ route('about') }}" class="hover:text-white transition">About</a>
-            <a href="{{ route('contact') }}" class="hover:text-white transition">Contact</a>
-            <a href="{{ route('terms') }}" class="hover:text-white transition">Terms</a>
+        <div class="hidden md:flex items-center gap-8 font-medium text-sm">
+            <a href="{{ route('home') }}"
+               class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
+
+            <a href="{{ route('report.track') }}"
+               class="nav-link {{ request()->routeIs('report.track*') ? 'active' : '' }}">Track Report</a>
+
+            <a href="{{ route('about') }}"
+               class="nav-link {{ request()->routeIs('about*') ? 'active' : '' }}">About</a>
+
+            <a href="{{ route('contact') }}"
+               class="nav-link {{ request()->routeIs('contact*') ? 'active' : '' }}">Contact</a>
+
+            <a href="{{ route('terms') }}"
+               class="nav-link {{ request()->routeIs('terms*') ? 'active' : '' }}">Terms</a>
         </div>
 
         <div class="flex items-center gap-3">
-    <a href="{{ route('faculty.login') }}"
-       class="bg-white/10 border border-blue-300 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white hover:text-blue-900 transition">
-        Faculty Login
-    </a>
-    <a href="/admin/login"
-       class="border border-blue-300 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white hover:text-blue-900 transition">
-        Admin Login
-    </a>
-</div>
+            <a href="{{ route('faculty.login') }}"
+               class="border border-blue-300 text-sm font-semibold px-4 py-2 rounded-lg transition
+                      {{ request()->routeIs('faculty.login') ? 'bg-white text-blue-900' : 'bg-white/10 text-white hover:bg-white hover:text-blue-900' }}">
+                Faculty Login
+            </a>
+            <a href="/admin/login"
+               class="border border-blue-300 text-sm font-semibold px-4 py-2 rounded-lg transition
+                      {{ request()->is('admin/login') ? 'bg-white text-blue-900' : 'text-white hover:bg-white hover:text-blue-900' }}">
+                Admin Login
+            </a>
+        </div>
+    </div>
 </nav>
 
 <!-- Hero -->

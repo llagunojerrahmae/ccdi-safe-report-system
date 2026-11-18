@@ -87,7 +87,7 @@
                 <dl class="space-y-1 text-slate-600">
                     <div class="flex gap-2">
                         <dt class="w-20 font-semibold text-[#14204a]">Email:</dt>
-                        <dd id="test-email" class="select-all">test@ccdi.edu.ph</dd>
+                        <dd id="test-email" class="select-all">testadmin@ccdi.edu.ph</dd>
                     </div>
                     <div class="flex gap-2">
                         <dt class="w-20 font-semibold text-[#14204a]">Password:</dt>

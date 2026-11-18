@@ -75,8 +75,14 @@
                 <a href="{{ url('/') }}" class="font-semibold text-[#26408b] hover:underline">&larr; Back to SafeReport</a>
             </p>
 
+            {{-- Evaluation note --}}
+            <p class="mt-6 text-xs leading-relaxed text-slate-500">
+                <span class="font-bold text-[#14204a]">Note:</span>
+                New faculty accounts need admin approval before they can log in. For evaluation, use the pre-approved test account below.
+            </p>
+
             {{-- Test account (for evaluation) --}}
-            <div class="mt-6 rounded-xl border border-dashed border-[#26408b]/40 bg-[#26408b]/5 px-4 py-3.5 text-sm">
+            <div class="mt-3 rounded-xl border border-dashed border-[#26408b]/40 bg-[#26408b]/5 px-4 py-3.5 text-sm">
                 <div class="mb-2 flex items-center justify-between gap-2">
                     <span class="text-xs font-bold uppercase tracking-wider text-[#26408b]">Test Account (for evaluation)</span>
                     <button type="button" id="use-test-account"
