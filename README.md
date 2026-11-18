@@ -61,9 +61,11 @@
    ```
 7. Open `http://127.0.0.1:8000` in your browser.
 
-## CREDITS
--------
-Credits to: PHP server-side scripting language, Laravel as our back-end PHP
-framework, TailwindCSS as our main utility-first CSS framework, Alpine.js for
-managing our components, and Livewire for live synchronous and asynchronous
-access of data.
+## Credits
+Credits to the following technologies used in this system:
+ 
+- Laravel (PHP) as our back-end PHP framework
+- MySQL (via XAMPP) as our database
+- Tailwind CSS as our main utility-first CSS framework
+- Vite as our front-end build tool
+- Blade Templates as our templating engine
